@@ -1,0 +1,8 @@
+ - path: "image_sources/Legendary_Base_Set_Dividers.pdf"
+   names: ["drdoom", "loki", "magneto", "redskull", "brotherhood", "enemiesofasgard",
+           "hydra", "mastersofevil", "radiation", "skrulls", "spider-foes", "doombotlegion",
+           "handninjas", "savagelandmutants", "sentinel", "blackwidow", "captainamerica",
+           "cyclops", "deadpool", "emmafrost", "gambit", "hawkeye", "hulk", "ironman", "nickfury",
+           "rogue", "spiderman", "storm", "thor", "wolverine", "masterstrike", "shieldofficer",
+           "shieldtrooper", "shieldagent", "wound", "scheme", "schemetwist", "bystander",
+           "player"]

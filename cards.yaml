@@ -1,0 +1,77 @@
+cards:
+  - name: "Rick Jones"
+    common1:
+      color: "B"
+      cost: "3"
+      recruit: "3"
+    common2:
+      color: "YU"
+      cost: "4"
+      recruit: "2"
+    uncommon:
+      color: "BG"
+      cost: "5"
+      combat: "3"
+    rare:
+      color: "UR"
+      cost: "7"
+      combat: "4"
+    image: "rickjones"
+    teams: ["Shield", "Avengers"]
+    themes: ["tech", "shield", "Transforms", "Smash", "Cost 3+", "Top Card", "Victory Pile", "Draw"]
+  - name: "Sentry"
+    common1:
+      color: "RG"
+      cost: "2"
+    common2:
+      color: "G"
+      cost: "4"
+      combat: "2+"
+    uncommon:
+      color: "UR"
+      cost: "2"
+      recruit: "2"
+    rare:
+      color: "U"
+      cost: "8"
+      combat: "0+"
+    image: "sentry"
+    teams: ["Avengers"]
+    themes: ["Transforms", "Transform Matters", "Top Card", "KO 0-Cost", "Top Hero Deck", "Turn Evil"]
+  - name: "Amadeus Cho"
+    common1:
+      color: "Y"
+      cost: "2"
+      recruit: "1"
+    common2:
+      color: "BG"
+      cost: "3"
+    uncommon:
+      color: "B"
+      cost: "6"
+      combat: "0+"
+    rare:
+      color: "B"
+      cost: "8"
+      combat: "4"
+    image: "amadeuscho"
+    teams: ["champions"]
+    themes: ["Outwit", "Draw", "Draw Matters", "Transform", "Top Card", "Feast"]
+  - name: "Hand Ninjas"
+    card_type: "HENCHMEN"
+    type_background: "#dcbc48"
+    type_color: "White"
+    image: "handninjas"
+    themes: ["Fight: +1 Recruit"]
+  - name: "Hydra"
+    card_type: "VILLAIN"
+    type_background: "#623535"
+    type_color: "White"
+    image: "hydra"
+    themes: ["Play extra villains", "Gain shield officer", "Give Wounds", "Extra Victory Points"]
+  - name: "Red Skull"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+    image: "redskull"
+    themes: ["KO from hand", "Extra recruit", "Draw", "Extra attack", "KO from top 3"]
