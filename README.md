@@ -1,5 +1,8 @@
 # Marvel Legendary Dividers Generator
 
+## Example
+![](https://github.com/ruler501/LegendaryDividers/raw/master/example.png)
+
 ## Setup
 Install poppler for your system and add it to your PATH.
 
