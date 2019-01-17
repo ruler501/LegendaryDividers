@@ -57,12 +57,14 @@ class Divider:
             name = card["name"]
             color_distribution = Counter()
             if "color" in card:
-                color_distribution = Counter([card["color"]])
+                color_distribution = Counter((card["color"],))
             elif "colors" in card:
-                color_distribution = Counter(card["colors"])
+                color_distribution = Counter(tuple(card["colors"]))
             elif "common1" in card and "common2" in card and "uncommon" in card and "rare" in card:
                 color = card["common1"]["color"]
-                cost = card["common1"]["cost"]
+                cost = None
+                if "cost" in card["common1"]:
+                    cost = card["common1"]["cost"]
                 recruit = None
                 if "recruit" in card["common1"]:
                     recruit = card["common1"]["recruit"]
@@ -74,7 +76,9 @@ class Divider:
                     piercing = card["common1"]["piercing"]
                 color_distribution[color] += 5
                 color = card["common2"]["color"]
-                cost = card["common2"]["cost"]
+                cost = None
+                if "cost" in card["common2"]:
+                    cost = card["common2"]["cost"]
                 recruit = None
                 if "recruit" in card["common2"]:
                     recruit = card["common2"]["recruit"]
@@ -86,7 +90,9 @@ class Divider:
                     piercing = card["common2"]["piercing"]
                 color_distribution[color] += 5
                 color = card["uncommon"]["color"]
-                cost = card["uncommon"]["cost"]
+                cost = None
+                if "cost" in card["uncommon"]:
+                    cost = card["uncommon"]["cost"]
                 recruit = None
                 if "recruit" in card["uncommon"]:
                     recruit = card["uncommon"]["recruit"]
@@ -98,7 +104,9 @@ class Divider:
                     piercing = card["uncommon"]["piercing"]
                 color_distribution[color] += 3
                 color = card["rare"]["color"]
-                cost = card["rare"]["cost"]
+                cost = None
+                if "cost" in card["rare"]:
+                    cost = card["rare"]["cost"]
                 recruit = None
                 if "recruit" in card["rare"]:
                     recruit = card["rare"]["recruit"]
@@ -286,11 +294,11 @@ class Divider:
         current_x = DIVIDER_WIDTH - COLOR_BAR_WIDTH
         if total_color > 0:
             color_value = {"Y": 0, "U": 1, "B": 2, "R": 3, "G": 4, "YU": 5, "UB": 6, "BR": 7, "RG": 8, "GY": 9,
-                           "YB": 10, "UR":11, "BG": 12, "RY": 13, "GU": 14, "E": 15}
+                           "YB": 10, "UR":11, "BG": 12, "RY": 13, "GU": 14, "E": 15, "W": -1}
             color_to_theme = {"Y": "instinct", "U": "ranged", "B": "tech", "R": "covert", "G": "strength",
-                              "E": "shield"}
+                              "E": "shield", "W": "blank"}
             color_to_color = {"Y": "#dea319", "U": "#01a1d5", "B": "#a6a8ab", "R": "#b32f40", "G": "#46b650",
-                              "E": "#7e8184"}
+                              "E": "#7e8184", "W": "White"}
             colors = sorted(self.color_distribution.keys(), key=lambda c: color_value[c])
             for color in colors:
                 bar_width = self.color_distribution[color] * COLOR_BAR_WIDTH // total_color
@@ -349,16 +357,14 @@ if __name__ == "__main__":
     pages = Divider.render_pages(dividers, 2, 3, 1700, 2200, grid, double_sided)
     pdf = FPDF('P', "in", "Letter")
     flipped_pdf = FPDF('P', "in", "Letter")
-    if not os.path.exists("temp"):
-        os.makedirs("temp")
     for i, page in enumerate(pages):
         page.save(f"temp/page{i}.png")
         if separate_docs and i % 2 == 1:
             flipped_pdf.add_page()
-            flipped_pdf.image(f"temp/page{i}.png", 0, 0, 8.5, 11)
+            flipped_pdf.image(f"output/page{i}.png", 0, 0, 8.5, 11)
         else:
             pdf.add_page()
-            pdf.image(f"temp/page{i}.png", 0, 0, 8.5, 11)
+            pdf.image(f"output/page{i}.png", 0, 0, 8.5, 11)
     if not os.path.exists("output"):
         os.makedirs("output")
     pdf.output("output/dividers.pdf")
