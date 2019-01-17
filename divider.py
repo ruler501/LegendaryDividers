@@ -1,11 +1,13 @@
 import math
 import os
+import textwrap
+
 import yaml
 
 from collections import Counter
 from fpdf import FPDF
 from PIL import Image, ImageDraw, ImageFont
-from typing import List
+from typing import List, Tuple
 
 
 DIVIDER_WIDTH = 728
@@ -15,7 +17,7 @@ DIVIDER_OFFSET_WIDTH = 90
 DIVIDER_MARGIN_WIDTH = 80
 DIVIDER_MARGIN_HEIGHT = 101
 LABEL_HEIGHT = 72
-TYPE_BOX_WIDTH = 230
+TYPE_BOX_WIDTH = 185
 NAME_MARGIN_WIDTH = 16
 ICON_SPACING = 8
 ICON_WIDTH = 37 * (LABEL_HEIGHT - 8) // 82
@@ -26,11 +28,13 @@ NAME_TYPE_FONT_SIZE = 24
 THEME_FONT_SIZE = 12
 GRID_WIDTH = 1
 GRID_SPACING = 18
+NOTE_FONT_SIZE = 16
 
 
 class Divider:
     def __init__(self, name: str, color_distribution: Counter, image: Image, card_type: str = None,
-                 type_background: str = "#766f92", type_color: str = "White", teams: List[str] = None, themes: List[str] = None):
+                 type_background: str = "#766f92", type_color: str = "White", teams: List[str] = None,
+                 themes: List[str] = None, notes: List[str] = None):
         self.name = name
         self.color_distribution = color_distribution
         self.image = image
@@ -39,12 +43,15 @@ class Divider:
         self.type_color = type_color
         self.teams = teams
         self.themes = themes
+        self.notes = notes
 
     @staticmethod
-    def load(filename: str) -> List["Divider"]:
-        data = None
+    def load(filename: str) -> Tuple[List["Divider"], bool, bool, bool]:
         with open(filename) as source_file:
             data = yaml.load(source_file)
+        grid = data["grid"]
+        double_sided = data["double_sided"]
+        separate_docs = data["separate_docs"]
         results: List[Divider] = []
         for card in data["cards"]:
             name = card["name"]
@@ -120,9 +127,12 @@ class Divider:
             themes = None
             if "themes" in card:
                 themes = card["themes"]
+            notes = None
+            if "notes" in card:
+                notes = card["notes"]
             results.append(Divider(name, color_distribution, image, card_type, type_background, type_color, teams,
-                                   themes))
-        return results
+                                   themes, notes))
+        return results, grid, double_sided, separate_docs
 
     @staticmethod
     def render_pages(dividers: List["Divider"], width: int, height: int, page_width: int, page_height: int,
@@ -231,11 +241,11 @@ class Divider:
         total_color = sum(amount for amount in self.color_distribution.values())
         if total_color == 0:
             team_x += COLOR_BAR_WIDTH
+        theme_font = ImageFont.truetype("resources/KOMIKAX_.ttf", THEME_FONT_SIZE)
         if self.themes is not None:
             current_y = 0
             cached_current_x = current_x
             # CodeReview: Break into 2 rows
-            theme_font = ImageFont.truetype("resources/KOMIKAX_.ttf", THEME_FONT_SIZE)
             # CodeReview: Specify an order that all will conform to
             for theme in self.themes:
                 resource_name = f"resources/icons/{theme}.png"
@@ -312,16 +322,45 @@ class Divider:
                                         (LABEL_HEIGHT // 2 - 3 * ICON_HEIGHT // 4) // 2))
                     """
                 current_x += bar_width
+        theme_font = ImageFont.truetype("resources/KOMIKAX_.ttf", NOTE_FONT_SIZE)
+        if self.notes is not None and len(self.notes) > 0:
+            current_y = LABEL_HEIGHT + 8
+            for note in self.notes:
+                resource_name = f"resources/icons/{note}.png"
+                if os.path.isfile(resource_name):
+                    icon = Image.open(resource_name)
+                    icon_width, icon_height = icon.size
+                    icon = icon.resize((ICON_HEIGHT * icon_width // icon_height, ICON_HEIGHT), Image.HAMMING)
+                    icon_width, icon_height = icon.size
+                    result.paste(icon, (32, current_y + (LABEL_HEIGHT // 2 - icon_height) // 2))
+                    line_height = icon_height
+                else:
+                    note = textwrap.fill(note, 80)
+                    _, text_height = draw.multiline_textsize(note, theme_font)
+                    draw.multiline_text((32, current_y), note, "Black", theme_font)
+                    line_height = text_height
+                draw.ellipse((8, current_y + (line_height - 16) // 2, 24, current_y + (line_height + 16) // 2),
+                             fill="Black")
+                current_y += text_height + 8
         return result
 
 if __name__ == "__main__":
-    dividers = Divider.load("cards.yaml")
-    pages = Divider.render_pages(dividers, 2, 3, 1700, 2200, True, True)
+    dividers, grid, double_sided, separate_docs = Divider.load("cards.yaml")
+    pages = Divider.render_pages(dividers, 2, 3, 1700, 2200, grid, double_sided)
     pdf = FPDF('P', "in", "Letter")
+    flipped_pdf = FPDF('P', "in", "Letter")
     if not os.path.exists("temp"):
         os.makedirs("temp")
     for i, page in enumerate(pages):
         page.save(f"temp/page{i}.png")
-        pdf.add_page()
-        pdf.image(f"temp/page{i}.png", 0, 0, 8.5, 11)
-    pdf.output("test.pdf")
+        if separate_docs and i % 2 == 1:
+            flipped_pdf.add_page()
+            flipped_pdf.image(f"temp/page{i}.png", 0, 0, 8.5, 11)
+        else:
+            pdf.add_page()
+            pdf.image(f"temp/page{i}.png", 0, 0, 8.5, 11)
+    if not os.path.exists("output"):
+        os.makedirs("output")
+    pdf.output("output/dividers.pdf")
+    if separate_docs:
+        flipped_pdf.output("output/dividers_flipped.pdf")

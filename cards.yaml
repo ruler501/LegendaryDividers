@@ -1,3 +1,6 @@
+grid: True
+double_sided: True
+separate_docs: True
 cards:
   - name: "Rick Jones"
     common1:
@@ -37,7 +40,7 @@ cards:
       combat: "0+"
     image: "sentry"
     teams: ["Avengers"]
-    themes: ["transforms", "topcard", "Transform Matters", "KO 0-Cost", "Top Hero Deck", "Turn Evil"]
+    themes: ["transforms", "topcard", "Transform Matters", "Feast 0-Cost", "Top Hero Deck", "Turn Evil"]
   - name: "Amadeus Cho"
     common1:
       color: "Y"
@@ -74,4 +77,147 @@ cards:
     type_background: "#766f92"
     type_color: "White"
     image: "redskull"
-    themes: ["KO from hand", "Positive Fight Abilities"]
+    themes: ["KO from hand", "Positive Fight"]
+    notes:
+      - "Can help you KO starting cards early game"
+      - "Can be painful late game if you K.O.d a lot"
+  - name: "Loki"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+    image: "loki"
+    themes: ["strength", "wound", "Even Mix Fight"]
+  - name: "Dr. Doom"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+    image: "drdoom"
+    themes: ["tech", "Put Cards on Top", "Positive Fight"]
+    notes:
+      - "Master strike is nearly ineffective if there's a lot of tech heroes available"
+  - name: "Magneto"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+    image: "magneto"
+    themes: ["xmen", "Discard", "Mostly Positive Fight"]
+  - name: "Sentry/Void"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "sentryvoid"
+    themes: ["wound", "transforms", "Cross Dimensional Rampage", "Feast", "Wounded Fury", "Mostly Negative Fight"]
+  - name: "M.O.D.O.K"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "modok"
+    themes: ["wound", "transforms", "recruit", "Outwit 4", "KO non-grey", "Mostly Positive Fight"]
+  - name: "General \"Thunderbird\" Ross"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "generalross"
+    themes: ["transforms", "wound", "Human Shields", "Cross Dimensional Rampage", "Wounded Fury", "Negative Fight"]
+  - name: "The Red King"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "redking"
+    themes: ["transforms", "tech", "wound", "Fight Restriction", "Mostly Negative Fight"]
+  - name: "King Hulk, Sakaarson"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "kinghulk"
+    themes: ["transforms", "wound", "Grows", "Wounded Fury", "KO", "Mostly Negative Fight"]
+  - name: "Illuminati, Secret Society"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "illuminati"
+    themes: ["transforms", "Outwit", "Discard", "Draw is Loot", "Negative Fight"]
+  - name: "Zombie Green Goblin"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "zombiegreengoblin"
+    themes: ["Grows", "Discard", "Rise of the Living Dead", "Negative Fight"]
+  - name: "Madelyne Pryor, Goblin Queen"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "goblinqueen"
+    themes: ["wound", "Human Shields", "Negative Fight"]
+  - name: "Wasteland Hulk"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "wastelandhulk"
+    themes: ["Grows", "Cross Dimensional Rampage", "Even Mix Fight"]
+  - name: "Nimrod, Super Sentinel"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "nimrod"
+    themes: ["6recruit", "Discard", "Even Mix Fight"]
+  - name: "Arcade"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "arcade"
+    themes: ["wound", "Human Shields", "Negative Fight"]
+  - name: "Deathbird"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "deathbird"
+    themes: ["wound", "Grows", "Neutral Fight"]
+  - name: "Shadow King"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "shadowking"
+    themes: ["Dominate from discard", "Negative Fight"]
+  - name: "Mojo"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "mojo"
+    themes: ["tech", "Human Shields", "Random Discard", "Even Mix Fight"]
+  - name: "Onslaught"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "onslaught"
+    themes: ["Dominate from Hand", "Reduced Hand Size", "Negative Fight"]
+  - name: "Dark Pheonix"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "darkpheonix"
+    themes: ["KO all Heroes with color from Hero Deck", "Mostly Negative Fight"]
+  - name: "Charles Xavier, Professor of Crime"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "xaviercrime"
+    themes: ["Grows", "Hidden Witnesses", "Mostly Negative Fight"]
+  - name: "The Goblin, Underworld Boss"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "goblinunderworld"
+    themes: ["wound", "Hidden Witnesses", "Mostly Negative Fight"]
+  - name: "Baron Heinrich Zemo"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "baronzemo"
+    themes: ["wound", "Savior", "Recruit to Rescue Bystanders", "Mostly Negative Fight"]
+  - name: "Arnim Zola"
+    card_type: "MASTERMIND"
+    type_background: "#766f92"
+    type_color: "White"
+#    image: "arnimzola"
+    themes: ["Abomination", "Even Mix Fight"]
