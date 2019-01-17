@@ -241,7 +241,8 @@ class Divider:
                 resource_name = f"resources/icons/{theme}.png"
                 if os.path.isfile(resource_name):
                     icon = Image.open(resource_name)
-                    icon = icon.resize((ICON_WIDTH, ICON_HEIGHT), Image.HAMMING)
+                    icon_width, icon_height = icon.size
+                    icon = icon.resize((ICON_HEIGHT * icon_width // icon_height, ICON_HEIGHT), Image.HAMMING)
                     icon_width, icon_height = icon.size
                     if current_x + ICON_SPACING + icon_width > team_x and current_y == 0:
                         current_y += LABEL_HEIGHT // 2

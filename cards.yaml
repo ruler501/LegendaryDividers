@@ -18,7 +18,7 @@ cards:
       combat: "4"
     image: "rickjones"
     teams: ["Shield", "Avengers"]
-    themes: ["tech", "shield", "Transforms", "Smash", "Cost 3+", "Top Card", "Victory Pile", "Draw"]
+    themes: ["tech", "shield", "transforms", "cost3+", "draw", "topcard", "Smash", "Victory Pile",]
   - name: "Sentry"
     common1:
       color: "RG"
@@ -37,7 +37,7 @@ cards:
       combat: "0+"
     image: "sentry"
     teams: ["Avengers"]
-    themes: ["Transforms", "Transform Matters", "Top Card", "KO 0-Cost", "Top Hero Deck", "Turn Evil"]
+    themes: ["transforms", "topcard", "Transform Matters", "KO 0-Cost", "Top Hero Deck", "Turn Evil"]
   - name: "Amadeus Cho"
     common1:
       color: "Y"
@@ -56,7 +56,7 @@ cards:
       combat: "4"
     image: "amadeuscho"
     teams: ["champions"]
-    themes: ["Outwit", "Draw", "Draw Matters", "Transform", "Top Card", "Feast"]
+    themes: ["draw", "topcard", "transforms", "Outwit", "Draw Matters", "Feast"]
   - name: "Hand Ninjas"
     card_type: "HENCHMEN"
     type_background: "#dcbc48"
@@ -68,10 +68,10 @@ cards:
     type_background: "#623535"
     type_color: "White"
     image: "hydra"
-    themes: ["Play extra villains", "Gain shield officer", "Give Wounds", "Extra Victory Points"]
+    themes: ["wound", "Play extra villains", "Gain shield officer", "Extra Victory Points"]
   - name: "Red Skull"
     card_type: "MASTERMIND"
     type_background: "#766f92"
     type_color: "White"
     image: "redskull"
-    themes: ["KO from hand", "Extra recruit", "Draw", "Extra attack", "KO from top 3"]
+    themes: ["KO from hand", "Positive Fight Abilities"]
