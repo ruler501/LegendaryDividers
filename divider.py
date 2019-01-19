@@ -343,7 +343,7 @@ class Divider:
                     result.paste(icon, (32, current_y + (LABEL_HEIGHT // 2 - icon_height) // 2))
                     line_height = icon_height
                 else:
-                    note = textwrap.fill(note, 80)
+                    note = textwrap.fill(note, 70)
                     _, text_height = draw.multiline_textsize(note, theme_font)
                     draw.multiline_text((32, current_y), note, "Black", theme_font)
                     line_height = text_height
@@ -357,16 +357,17 @@ if __name__ == "__main__":
     pages = Divider.render_pages(dividers, 2, 3, 1700, 2200, grid, double_sided)
     pdf = FPDF('P', "in", "Letter")
     flipped_pdf = FPDF('P', "in", "Letter")
+    if not os.path.exists("output"):
+        os.makedirs("output")
     for i, page in enumerate(pages):
-        page.save(f"temp/page{i}.png")
+        print(f"Generating page {i}")
+        page.save(f"output/page{i}.png")
         if separate_docs and i % 2 == 1:
             flipped_pdf.add_page()
             flipped_pdf.image(f"output/page{i}.png", 0, 0, 8.5, 11)
         else:
             pdf.add_page()
             pdf.image(f"output/page{i}.png", 0, 0, 8.5, 11)
-    if not os.path.exists("output"):
-        os.makedirs("output")
     pdf.output("output/dividers.pdf")
     if separate_docs:
         flipped_pdf.output("output/dividers_flipped.pdf")

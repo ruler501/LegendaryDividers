@@ -6,3 +6,30 @@
            "rogue", "spiderman", "storm", "thor", "wolverine", "masterstrike", "shieldofficer",
            "shieldtrooper", "shieldagent", "wound", "scheme", "schemetwist", "bystander",
            "player"]
+ - path: "image_sources/Legendary_Captain_America_75th_Aniversary_Dividers.pdf"
+   names: ["baronzemo", "arnimzola", "zolascreations", "mastersofevilwwii", "captainamerica1941",
+           "captainamericafalcon", "steverogersdirector", "agentx13", "wintersoldier"]
+ - path: "image_sources/Legendary_Noir_Divider_Set.pdf"
+   names: ["xaviercrime", "goblinunderworld", "goblinsfreakshow", "xmennoir", "angelnoir",
+           "daredevilnoir", "ironmannoir", "lukecagenoir", "spidermannoir"]
+ - path: "image_sources/Legendary_Secret_Wars_Volume_1_Dividers.pdf"
+   names: ["zombiegreengoblin", "wastelandhulk", "goblinqueen", "nimrodsupersentinel",
+           "sentinelterritories", "deadlands", "manhattan1610", "domainofapocalypse",
+           "limbo", "wasteland", "ghostracers", "modoks", "thorcorps", "blackbolt",
+           "blackpanther", "drstrange", "superiorironman", "thanos", "namorsubmariner",
+           "maximus", "proximamidnight", "magik", "oldmanlogan", "apocalyptickittypryde",
+           "ladythor", "captainmarvel", "ultimatespiderman", "ambition", "sidekick", "bystander"]
+ - path: "image_sources/Legendary_World_War_Hulk_Card_Dividers.pdf"
+   names: ["generalross", "illuminati", "kinghulk", "modok", "redking", "sentryvoid",
+           "aspectsofthevoid", "codered", "illuminati", "intelligencia", "sakaarimperialguard",
+           "ufoes", "warbound", "cytoplasmicspikes", "deathsheads", "sakaaranhivelings",
+           "amadeuscho", "brucebanner", "caiera", "gladiatorhulk", "hiroim", "hulkbusterironman",
+           "greyhulk", "korg", "miektheunhived", "namora", "nonamebroodqueen", "rickjones", "sentry",
+           "shehulk", "skaar"]
+ - path: "image_sources/Legendary_X_Men_Card_Dividers.pdf"
+   names: ["arcade", "darkpheonix", "deathbird", "mojo", "onslaught", "shadowking", "darkdescendants",
+           "hellfireclub", "mojoverse", "murderworld", "shadowx", "shiarimperialguard", "sisterhoodofmutants",
+           "brood", "hellfirecult", "sapienleague", "shiardeathcommandos", "shiarpatrolcraft",
+           "auroranorthstar", "banshee", "beast", "cannonball", "colossuswolverine", "dazzler",
+           "havok", "jubilee", "kittypryde", "legion", "longshot", "phoenix", "polaris", "psylocke",
+           "x23", "horror", "heroicbystanders", "tokens"]
