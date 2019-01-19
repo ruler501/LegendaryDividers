@@ -558,6 +558,18 @@ cards:
     type_background: "#dcbd48"
     type_color: "White"
     image: "bystander"
+  - name: ""
+    common1:
+      color: ""
+    common2:
+      recruit: ""
+    uncommon:
+      color: ""
+    rare:
+      color: ""
+    image: ""
+    teams: [""]
+    themes: [""]
   - name: "Ambition"
     card_type: ""
     type_background: "#766f92"
