@@ -1,6 +1,145 @@
-grid: True
+# BEGIN BOILERPLATE
+henchmen: &henchmen
+  card_type: "HENCHMEN"
+  type_background: "#dcbc48"
+  type_color: "White"
+villain: &villain
+  card_type: "VILLAIN"
+  type_background: "#623535"
+  type_color: "White"
+mastermind: &mastermind
+  card_type: "MASTERMIND"
+  type_background: "#766f92"
+  type_color: "White"
+player: &player
+  card_type: "PLAYER"
+  type_background: "#355e3b"
+  type_color: "White"
+  image: "player"
+  teams: ["shield"]
+clear: &clear !python/tuple [0, 0, 0, 0]
+font: &font "resources/KOMIKAX_.ttf"
+# END BOILERPLATE
+
+grid_lines: True
+grid_width: 1
+grid_spacing: 18
 double_sided: True
 separate_docs: True
+width_count: 2
+height_count: 3
+page_width: 1700
+page_height: 2200
+divider_width: @divider_width 728
+divider_height: @divider_height 592
+offset_height: 100
+offset_width: 90
+margin_width: 80
+margin_height: 100
+format:
+  width: *divider_width
+  height: *divider_height
+  properties:
+    - position: [0, 0]
+      size: [*divider_width, @label_height 72]
+      type: "container"
+      spacing: 8
+      icon_width: 30
+      properties:
+        - property: "card_type"
+          required: False
+          position: [0, 0]
+          size: [185, *label_height]
+          type: "Text"
+          background_property: "type_background"
+          background_default: "Black"
+          text_color_property: "type_color"
+          text_color_default: "White"
+          font: *font
+          font_size: 24
+          centered_width: True
+          centered_height: True
+        - property: "name"
+          required: True
+          position: ["auto", 0]
+          size: ["auto", *label_height]
+          type: "text"
+          background_property: null
+          background_default: *clear
+          text_color_property: "name_color"
+          text_color_default: "Black"
+          font: *font
+          font_size: 24
+          centered_width: False
+          centered_height: True
+        - property: "themes"
+          required: False
+          position: ["auto", 0]
+          size: ["auto", *label_height]
+          type: "list[iconsandtext]"
+          text_color_property: "themes_color"
+          text_color_default: "Black"
+          font: *font
+          font_size: 12
+          centered_width: False
+          centered_height: True
+          rows: 2
+          columns: null
+          spacing: 8
+          orientation: "horizontal"
+          bulleted: False
+          wrap: null
+        - property: "teams"
+          required: False
+          position: [448, 0]
+          size: [*icon_width, *label_height]
+          type: "list[icons]"
+          centered_height: True
+          centered_width: True
+          rows: 2
+          columns: null
+          spacing: 8
+          orientation: "vertical"
+          bulleted: False
+          wrap: null
+        - property: "colors"
+          required: False
+          position: [485, 0]
+          size: [243, *label_height]
+          type: "colorbar"
+    - property: "image"
+      position: [0, *label_height]
+      size: [*divider_width, &image_height 520]
+      type: "image"
+    - property: "notes"
+      position: [0, *label_height]
+      size: [*divider_width, *image_height]
+      type: "list[text]"
+      text_color_property: "notes_color"
+      text_color_default: "Black"
+      font: *font
+      font_size: 16
+      centered_width: False
+      centered_height: True
+      rows: null
+      columns: null
+      spacing: 8
+      orientation: "vertical"
+      bulleted: True
+      wrap: 70
+populate_from_rarity:
+  rarities:
+    common1: 5
+    common2: 5
+    uncommon: 3
+    rare: 1
+  properties:
+    color: "colors"
+    cost: "costs"
+    attack: "attacks"
+    recruit: "recruits"
+    piercing: "piercings"
+
 cards:
   - name: "Rick Jones"
     common1:
@@ -60,470 +199,308 @@ cards:
     image: "amadeuscho"
     teams: ["champions"]
     themes: ["draw", "topcard", "transforms", "Outwit", "Draw Matters", "Feast"]
-  - name: "Hand Ninjas"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Hand Ninjas"
     image: "handninjas"
     themes: ["Fight: +1 Recruit"]
-  - name: "Hydra"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Hydra"
     image: "hydra"
     themes: ["wound", "Play extra villains", "Gain shield officer", "Extra VP"]
-  - name: "Red Skull"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Red Skull"
     image: "redskull"
     themes: ["KO from hand", "Positive Fight"]
     notes:
       - "Can help you KO starting cards early game"
       - "Can be painful late game if you K.O.d a lot"
-  - name: "Loki"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Loki"
     image: "loki"
     themes: ["strength", "wound", "Even Mix Fight"]
-  - name: "Dr. Doom"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Dr. Doom"
     image: "drdoom"
     themes: ["tech", "Put Cards on Top", "Positive Fight"]
     notes:
       - "Master strike is nearly ineffective if there's a lot of tech heroes available"
-  - name: "Magneto"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Magneto"
     image: "magneto"
     themes: ["xmen", "Discard", "Mostly Positive Fight"]
-  - name: "Sentry/Void"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Sentry/Void"
     image: "sentryvoid"
     themes: ["wound", "transforms", "Cross Dimensional Rampage", "Feast", "Wounded Fury", "Mostly Negative Fight"]
-  - name: "M.O.D.O.K"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "M.O.D.O.K"
     image: "modok"
     themes: ["wound", "transforms", "recruit", "Outwit 4", "KO non-grey", "Mostly Positive Fight"]
-  - name: "General \"Thunderbolt\" Ross/Red Hulk"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "General \"Thunderbolt\" Ross/Red Hulk"
     image: "generalross"
     themes: ["transforms", "wound", "Human Shields", "Cross Dimensional Rampage", "Wounded Fury", "Negative Fight"]
-  - name: "The Red King"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "The Red King"
     image: "redking"
     themes: ["transforms", "tech", "wound", "Fight Restriction", "Mostly Negative Fight"]
-  - name: "King Hulk, Sakaarson"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "King Hulk, Sakaarson"
     image: "kinghulk"
     themes: ["transforms", "wound", "Grows", "Wounded Fury", "KO", "Mostly Negative Fight"]
-  - name: "Illuminati, Secret Society"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Illuminati, Secret Society"
     image: "illuminati"
     themes: ["transforms", "Outwit", "Discard", "Draw is Loot", "Negative Fight"]
-  - name: "Zombie Green Goblin"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Zombie Green Goblin"
     image: "zombiegreengoblin"
     themes: ["Grows", "Discard", "Rise of the Living Dead", "Negative Fight"]
-  - name: "Madelyne Pryor, Goblin Queen"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Madelyne Pryor, Goblin Queen"
     image: "goblinqueen"
     themes: ["wound", "Human Shields", "Negative Fight"]
-  - name: "Wasteland Hulk"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Wasteland Hulk"
     image: "wastelandhulk"
     themes: ["Grows", "Cross Dimensional Rampage", "Even Mix Fight"]
-  - name: "Nimrod, Super Sentinel"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Nimrod, Super Sentinel"
     image: "nimrodsupersentinel"
     themes: ["6recruit", "Discard", "Even Mix Fight"]
-  - name: "Arcade"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Arcade"
     image: "arcade"
     themes: ["wound", "Human Shields", "Negative Fight"]
-  - name: "Deathbird"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Deathbird"
     image: "deathbird"
     themes: ["wound", "Grows", "Neutral Fight"]
-  - name: "Shadow King"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Shadow King"
     image: "shadowking"
     themes: ["Dominate from discard", "Negative Fight"]
-  - name: "Mojo"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Mojo"
     image: "mojo"
     themes: ["tech", "Human Shields", "Random Discard", "Even Mix Fight"]
-  - name: "Onslaught"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Onslaught"
     image: "onslaught"
     themes: ["Dominate from Hand", "Reduced Hand Size", "Negative Fight"]
-  - name: "Dark Pheonix"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Dark Pheonix"
     image: "darkpheonix"
     themes: ["KO all Heroes with color from Hero Deck", "Mostly Negative Fight"]
-  - name: "Charles Xavier, Professor of Crime"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Charles Xavier, Professor of Crime"
     image: "xaviercrime"
     themes: ["Grows", "Hidden Witnesses", "Mostly Negative Fight"]
-  - name: "The Goblin, Underworld Boss"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "The Goblin, Underworld Boss"
     image: "goblinunderworld"
     themes: ["wound", "Hidden Witnesses", "Mostly Negative Fight"]
-  - name: "Baron Heinrich Zemo"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Baron Heinrich Zemo"
     image: "baronzemo"
     themes: ["wound", "Savior", "Recruit to Rescue Bystanders", "Mostly Negative Fight"]
-  - name: "Arnim Zola"
-    card_type: "MASTERMIND"
-    type_background: "#766f92"
-    type_color: "White"
+  - <<: *mastermind
+    name: "Arnim Zola"
     image: "arnimzola"
     themes: ["Abomination", "Even Mix Fight"]
-  - name: "Player One"
-    card_type: "PLAYER"
-    type_background: "#355e3b"
-    type_color: "White"
-    image: "player"
-    teams: ["Shield"]
-  - name: "Player Two"
-    card_type: "PLAYER"
-    type_background: "#355e3b"
-    type_color: "White"
-    image: "player"
-    teams: ["Shield"]
-  - name: "Player Three"
-    card_type: "PLAYER"
-    type_background: "#355e3b"
-    type_color: "White"
-    image: "player"
-    teams: ["Shield"]
-  - name: "Player Four"
-    card_type: "PLAYER"
-    type_background: "#355e3b"
-    type_color: "White"
-    image: "player"
-    teams: ["Shield"]
-  - name: "Player Five"
-    card_type: "PLAYER"
-    type_background: "#355e3b"
-    type_color: "White"
-    image: "player"
-    teams: ["Shield"]
-  - name: "Sapien League"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *player
+    name: "Player One"
+  - <<: *player
+    name: "Player Two"
+  - <<: *player
+    name: "Player Three"
+  - <<: *player
+    name: "Player Four"
+  - <<: *player
+    name: "Player Five"
+  - <<: *henchmen
+    name: "Sapien League"
     image: "sapienleague"
     themes: ["Fight: KO Hero then play top villain if henchman"]
-  - name: "Shi'ar Patrol Craft"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Shi'ar Patrol Craft"
     image: "shiarpatrolcraft"
     themes: ["Fight: Next hero has Soaring Flight"]
-  - name: "Shi'ar Death Commandos"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Shi'ar Death Commandos"
     image: "shiardeathcommandos"
     themes: ["Human Shield", "Fight: KO hero"]
-  - name: "Hellfire Cult"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Hellfire Cult"
     image: "hellfirecult"
     themes: ["Fight: KO top if 0 cost, or +1 recruit"]
-  - name: "Thor Corps"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Thor Corps"
     image: "thorcorps"
     themes: ["strength", "ranged", "Fight: Gain as Hero"]
     color: "GU"
-  - name: "Cytoplasmic Spikes"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Cytoplasmic Spikes"
     image: "cytoplasmicspikes"
     themes: ["Fight: Feast, non-grey gain 2 recruit"]
-  - name: "Sentinel"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Sentinel"
     image: "sentinel"
     themes: ["Fight: KO a Hero"]
-  - name: "Sentinel"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Sentinel"
     image: "sentinel"
     themes: ["Fight: KO a Hero"]
-  - name: "Doombot Legion"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Doombot Legion"
     image: "doombotlegion"
     themes: ["Fight: KO one of top two cards"]
-  - name: "Savage Land Mutates"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Savage Land Mutates"
     image: "savagelandmutants"
     themes: ["Fight: Hand size increase by 1"]
-  - name: "Death's Heads"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Death's Heads"
     image: "deathsheads"
     themes: ["Fight: Outwit: KO a 0 Cost Hero"]
-  - name: "Sakaaran Hivelings"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Sakaaran Hivelings"
     image: "sakaaranhivelings"
     themes: ["Fight: Scry 1, Feast"]
-  - name: "The Brood"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "The Brood"
     image: "brood"
     themes: ["+1 for KO Bystanders", "Fight: KO a Hero and Bystander"]
-  - name: "M.O.D.O.K.S"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "M.O.D.O.K.S"
     image: "modoks"
     themes: ["Fight: KO a Hero from discard or HQ,", "if had recruit +1 recruit"]
-  - name: "Ghost Racers"
-    card_type: "HENCHMEN"
-    type_background: "#dcbc48"
-    type_color: "White"
+  - <<: *henchmen
+    name: "Ghost Racers"
     image: "ghostracers"
     themes: ["Rise of the Living Dead", "Fight: Reveal R or KO a hero with attack"]
-  - name: "Shadow-X"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Shadow-X"
     image: "shadowx"
     themes: ["ranged", "6recruit", "Dominate", "Discard", "Gain", "Trap", "X-Gene"]
     colors: ["B", "G", "G", "R", "U", "Y", "Y", "W"]
-  - name: "Mojoverse"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Mojoverse"
     image: "mojoverse"
     themes: ["covert", "Human Shield", "KO a hero", "Trap", "Discard"]
-  - name: "Shi'ar Imperial Guard"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Shi'ar Imperial Guard"
     image: "shiarimperialguard"
     themes: ["draw", "wound", "Reveal Ally", "KO", "Extra Villains"]
-  - name: "U-Foes"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "U-Foes"
     image: "ufoes"
     themes: ["wound", "Play extra villains", "Gain shield officer", "Extra Victory Points"]
-  - name: "Hellfire Club"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Hellfire Club"
     image: "hellfireclub"
     themes: ["xmen", "wound", "Dominate", "Increase Costs", "Ascend", "Trap", "+1 for Cards Played"]
-  - name: "Sisterhood of Mutants"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Sisterhood of Mutants"
     image: "sisterhoodofmutants"
     themes: ["instinct", "Dominate", "KO a hero", "Ascend", "Trap", "Shuffle back in"]
-  - name: "Dark Descendants"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Dark Descendants"
     image: "darkdescendants"
     themes: ["ranged", "KO a hero", "Dominate", "Trap", "Gain as hero", "X-Gene"]
     colors: ["U", "W", "W", "W"]
-  - name: "Spider-Foes"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Spider-Foes"
     image: "spider-foes"
     themes: ["covert", "wound", "Increase Hand Size", "City Space", "Bystander"]
-  - name: "Radiation"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Radiation"
     image: "radiation"
     themes: ["wound", "strength", "KO a hero", "Extra Villain", "City Space", "Bystander"]
-  - name: "Enemies of Asgard"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Enemies of Asgard"
     image: "enemiesofasgard"
     themes: ["ranged", "wound", "draw", "KO Wounds"]
-  - name: "Masters of Evil"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Masters of Evil"
     image: "mastersofevil"
     themes: ["tech", "avengers", "wound", "City Space", "KO Hero", "Optional Revealed Feast", "Bystander", "Extra VP"]
-  - name: "Brotherhood"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Brotherhood"
     image: "brotherhood"
     themes: ["xmen", "wound", "Extra Twist", "KO Hero"]
-  - name: "Murderworld"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Murderworld"
     image: "murderworld"
     themes: ["wound", "Human Shield", "Extra Villain", "Trap", "Diverse Costs"]
-  - name: "Skrulls"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Skrulls"
     image: "skrulls"
     themes: ["KO Hero", "Free Acquire"]
-  - name: "X-Men Noir"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "X-Men Noir"
     image: "xmennoir"
     themes: ["tech", "strength", "recruit", "draw", "Investigate", "KO 0-Cost", "Increase Hand Size", "HQ Manip"]
-  - name: "Domain of Apocalypse"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Domain of Apocalypse"
     image: "domainofapocalypse"
     themes: ["draw", "xmen", "Teleport", "Free Acquire", "KO Hero", "CDR", "Ascend"]
-  - name: "Sentinel Territories"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Sentinel Territories"
     image: "sentinelterritories"
     themes: ["draw", "Modify Villain Attack", "Less Villains", "Extra Recruit"]
-  - name: "Aspects of the Void"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Aspects of the Void"
     image: "aspectsofthevoid"
     themes: ["Wounded Fury", "Bystander", "Extra Recruit", "Pass Right", "Feast", "Free Acquire", "Trap",
              "Extra Master Strike"]
-  - name: "Code Red"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Code Red"
     image: "codered"
     themes: ["covert", "draw",  "wound", "Reduce Cost", "KO Hero", "KO 0-Cost", "Wounded Fury", "Trap"]
-  - name: "Illuminati"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Illuminati"
     image: "illuminati"
     themes: ["Outwit", "Discard", "Bystander", "CDR", "Vanilla", "Matching Class"]
-  - name: "Intelligencia"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Intelligencia"
     image: "intelligencia"
     themes: ["wound", "Wounded Fury", "Outwit", "KO Hero", "Extra Villain", "Discard"]
-  - name: "Sakaar Imperial Guard"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Sakaar Imperial Guard"
     image: "sakaarimperialguard"
     themes: ["wound", "draw", "KO Hero", "KO 1 of top 3", "Single Class"]
-  - name: "Manhattan(Earth-1610)"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Manhattan(Earth-1610)"
     image: "manhattan1610"
     themes: ["CDR", "Gain as Hero", "Class count", "Teleport", "ranged", "covert"]
     colors: ["G", "U", "U", "R"]
-  - name: "Limbo"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Limbo"
     image: "limbo"
     themes: ["Bystander", "KO hero", "Teleport"]
-  - name: "Zola's Creations"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Zola's Creations"
     image: "zolascreations"
     themes: ["wound", "Abomination", "KO hero", "City Space", "Prime Cost", "Discard"]
-  - name: "Master of Evil(WWII)"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Master of Evil(WWII)"
     image: "mastersofevilwwii"
     themes: ["draw", "wound", "Bystander", "KO Hero", "Savior", "Optional Revealed Feast"]
-  - name: "Warbound"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Warbound"
     image: "warbound"
     themes: ["wound", "draw", "Wounded Fury", "Feast", "Extra Recruit", "Scry 2", "Discard"]
-  - name: "Goblin's Freak Show"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Goblin's Freak Show"
     image: "goblinsfreakshow"
     themes: ["wound", "strength", "Hidden Witness", "Extra Villain", "HQ cost"]
-  - name: "Wasteland"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "Wasteland"
     image: "wasteland"
     themes: ["draw", "instinct", "CDR", "Feast Cost 2 or less", "Bystander", "Ascend", "Discard"]
-  - name: "The Deadlands"
-    card_type: "VILLAIN"
-    type_background: "#623535"
-    type_color: "White"
+  - <<: *villain
+    name: "The Deadlands"
     image: "deadlands"
     themes: ["avengers", "shield", "covert", "wound", "strength", "Rise of the Living Dead", "Bystander", "KO Hero",
              "Add tactic", "Ascend", "Discard"]
@@ -558,18 +535,6 @@ cards:
     type_background: "#dcbd48"
     type_color: "White"
     image: "bystander"
-  - name: ""
-    common1:
-      color: ""
-    common2:
-      recruit: ""
-    uncommon:
-      color: ""
-    rare:
-      color: ""
-    image: ""
-    teams: [""]
-    themes: [""]
   - name: "Ambition"
     card_type: ""
     type_background: "#766f92"

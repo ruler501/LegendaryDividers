@@ -7,145 +7,69 @@ import yaml
 from collections import Counter
 from fpdf import FPDF
 from PIL import Image, ImageDraw, ImageFont
-from typing import List, Tuple
-
-
-DIVIDER_WIDTH = 728
-DIVIDER_HEIGHT = 592
-DIVIDER_OFFSET_HEIGHT = 100
-DIVIDER_OFFSET_WIDTH = 90
-DIVIDER_MARGIN_WIDTH = 80
-DIVIDER_MARGIN_HEIGHT = 101
-LABEL_HEIGHT = 72
-TYPE_BOX_WIDTH = 185
-NAME_MARGIN_WIDTH = 16
-ICON_SPACING = 8
-ICON_WIDTH = 37 * (LABEL_HEIGHT - 8) // 82
-ICON_HEIGHT = (LABEL_HEIGHT - 8) // 2
-COLOR_BAR_WIDTH = DIVIDER_WIDTH // 3
-IMAGE_HEIGHT = 520
-NAME_TYPE_FONT_SIZE = 24
-THEME_FONT_SIZE = 12
-GRID_WIDTH = 1
-GRID_SPACING = 18
-NOTE_FONT_SIZE = 16
+from typing import List, Mapping, Tuple, Union
 
 
 class Divider:
-    def __init__(self, name: str, color_distribution: Counter, image: Image, card_type: str = None,
-                 type_background: str = "#766f92", type_color: str = "White", teams: List[str] = None,
-                 themes: List[str] = None, notes: List[str] = None):
-        self.name = name
-        self.color_distribution = color_distribution
-        self.image = image
-        self.card_type = card_type
-        self.type_background = type_background
-        self.type_color = type_color
-        self.teams = teams
-        self.themes = themes
-        self.notes = notes
+    def __init__(self, formatting: Mapping, properties: Mapping):
+        self.format = formatting
+        self.properties = properties
 
     @staticmethod
-    def load(filename: str) -> Tuple[List["Divider"], bool, bool, bool]:
+    def load(filename: str) -> Tuple[List["Divider"], Mapping]:
         with open(filename) as source_file:
             data = yaml.load(source_file)
-        grid = data["grid"]
-        double_sided = data["double_sided"]
-        separate_docs = data["separate_docs"]
+        global_values = {
+            "grid_lines": data["grid_lines"],
+            "grid_width": data["grid_width"],
+            "grid_spacing": data["grid_spacing"],
+            "double_sided": data["double_sided"],
+            "separate_docs": data["separate_docs"],
+            "width_count": data["width_count"],
+            "height_count": data["height_count"],
+            "page_width": data["page_width"],
+            "page_height": data["page_height"],
+            "divider_width": data["divider_width"],
+            "divider_height": data["divider_height"],
+            "offset_height": data["offset_height"],
+            "offset_width": data["offset_width"],
+            "margin_width": data["margin_width"],
+            "margin_height": data["margin_height"]
+            }
+        formatting = data["format"]
+        populate_from_rarities = data["populate_from_rarities"]
         results: List[Divider] = []
         for card in data["cards"]:
-            name = card["name"]
-            color_distribution = Counter()
-            if "color" in card:
-                color_distribution = Counter((card["color"],))
-            elif "colors" in card:
-                color_distribution = Counter(tuple(card["colors"]))
-            elif "common1" in card and "common2" in card and "uncommon" in card and "rare" in card:
-                color = card["common1"]["color"]
-                cost = None
-                if "cost" in card["common1"]:
-                    cost = card["common1"]["cost"]
-                recruit = None
-                if "recruit" in card["common1"]:
-                    recruit = card["common1"]["recruit"]
-                combat = None
-                if "combat" in card["common1"]:
-                    combat = card["common1"]["combat"]
-                piercing = None
-                if "piercing" in card["common1"]:
-                    piercing = card["common1"]["piercing"]
-                color_distribution[color] += 5
-                color = card["common2"]["color"]
-                cost = None
-                if "cost" in card["common2"]:
-                    cost = card["common2"]["cost"]
-                recruit = None
-                if "recruit" in card["common2"]:
-                    recruit = card["common2"]["recruit"]
-                combat = None
-                if "combat" in card["common2"]:
-                    combat = card["common2"]["combat"]
-                piercing = None
-                if "piercing" in card["common2"]:
-                    piercing = card["common2"]["piercing"]
-                color_distribution[color] += 5
-                color = card["uncommon"]["color"]
-                cost = None
-                if "cost" in card["uncommon"]:
-                    cost = card["uncommon"]["cost"]
-                recruit = None
-                if "recruit" in card["uncommon"]:
-                    recruit = card["uncommon"]["recruit"]
-                combat = None
-                if "combat" in card["uncommon"]:
-                    combat = card["uncommon"]["combat"]
-                piercing = None
-                if "piercing" in card["uncommon"]:
-                    piercing = card["uncommon"]["piercing"]
-                color_distribution[color] += 3
-                color = card["rare"]["color"]
-                cost = None
-                if "cost" in card["rare"]:
-                    cost = card["rare"]["cost"]
-                recruit = None
-                if "recruit" in card["rare"]:
-                    recruit = card["rare"]["recruit"]
-                combat = None
-                if "combat" in card["rare"]:
-                    combat = card["rare"]["combat"]
-                piercing = None
-                if "piercing" in card["rare"]:
-                    piercing = card["rare"]["piercing"]
-                color_distribution[color] += 1
-            image = None
-            if "image" in card:
-                image = Image.open(f"resources/images/{card['image']}.png")
-            card_type = None
-            if "card_type" in card:
-                card_type = card["card_type"]
-            type_background = None
-            if "type_background" in card:
-                type_background = card["type_background"]
-            type_color = None
-            if "type_background" in card:
-                type_color = card["type_color"]
-            teams = None
-            if "teams" in card:
-                teams = card["teams"]
-            themes = None
-            if "themes" in card:
-                themes = card["themes"]
-            notes = None
-            if "notes" in card:
-                notes = card["notes"]
-            results.append(Divider(name, color_distribution, image, card_type, type_background, type_color, teams,
-                                   themes, notes))
-        return results, grid, double_sided, separate_docs
+            for rarity, count in populate_from_rarities["rarities"].items():
+                if rarity not in card:
+                    continue
+                for property_name, source in populate_from_rarities["properties"].items():
+                    if source not in card:
+                        continue
+                    if property_name not in card:
+                        card[property_name] = []
+                    card[property_name] += [card[rarity][source]]*count
+                results.append(Divider(formatting, card))
+        return results, global_values
 
     @staticmethod
-    def render_pages(dividers: List["Divider"], width: int, height: int, page_width: int, page_height: int,
-                     grid_lines: bool = True, double_sided: bool = False):
+    def render_pages(dividers: List["Divider"], global_properties: Mapping):
         pages: List[Image] = []
+        grid_lines = global_properties["grid_lines"]
+        grid_width = global_properties["grid_width"]
+        grid_spacing = global_properties["grid_spacing"]
+        double_sided = global_properties["double_sided"]
+        separate_docs = global_properties["separate_docs"]
+        width = global_properties["width_count"]
+        height = global_properties["height_count"]
+        page_width = global_properties["page_width"]
+        page_height = global_properties["page_height"]
+        divider_width = global_properties["divider_width"]
+        divider_height = global_properties["divider_height"]
+        offset_height = global_properties["offset_height"]
+        offset_width = global_properties["offset_width"]
+        margin_width = global_properties["margin_width"]
+        margin_height = global_properties["margin_height"]
         for page_number in range(int(math.ceil(len(dividers) / width / height))):
             page = Image.new("RGBA", (page_width, page_height), color="White")
             draw = ImageDraw.Draw(page)
@@ -157,31 +81,31 @@ class Divider:
                         should_break = True
                         break
                     divider = dividers[index]
-                    x = DIVIDER_OFFSET_WIDTH + x_index * (DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH)
-                    y = DIVIDER_OFFSET_HEIGHT + y_index * (DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT)
+                    x = offset_width + x_index * (divider_width + margin_width)
+                    y = offset_height + y_index * (divider_height + margin_height)
                     div_image = divider.render()
                     page.paste(div_image, (x, y))
                     if grid_lines:
-                        draw.line(((x - DIVIDER_MARGIN_WIDTH + GRID_SPACING, y-1), (x - GRID_SPACING, y-1)),
-                                  fill="Black", width=GRID_WIDTH)
-                        draw.line(((x-1, y - DIVIDER_MARGIN_HEIGHT + GRID_SPACING), (x-1, y - GRID_SPACING)),
-                                  fill="Black", width=GRID_WIDTH)
-                        draw.line(((x - DIVIDER_MARGIN_WIDTH + GRID_SPACING, y + DIVIDER_HEIGHT),
-                                   (x - GRID_SPACING, y + DIVIDER_HEIGHT)), fill="Black", width=GRID_WIDTH)
-                        draw.line(((x - 1, y + DIVIDER_HEIGHT + GRID_SPACING),
-                                   (x - 1, y + DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT - GRID_SPACING)),
-                                  fill="Black", width=GRID_WIDTH)
-                        draw.line(((x + DIVIDER_WIDTH + GRID_SPACING, y - 1),
-                                   (x + DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH - GRID_SPACING, y - 1)),
-                                  fill="Black", width=GRID_WIDTH)
-                        draw.line(((x + DIVIDER_WIDTH, y - DIVIDER_MARGIN_HEIGHT + GRID_SPACING),
-                                   (x + DIVIDER_WIDTH, y - GRID_SPACING)), fill="Black", width=GRID_WIDTH)
-                        draw.line(((x + DIVIDER_WIDTH, y + DIVIDER_HEIGHT + GRID_SPACING),
-                                   (x + DIVIDER_WIDTH, y + DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT - GRID_SPACING)),
-                                  fill="Black", width=GRID_WIDTH)
-                        draw.line(((x + DIVIDER_WIDTH + GRID_SPACING, y + DIVIDER_HEIGHT),
-                                   (x + DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH - GRID_SPACING, y + DIVIDER_HEIGHT)),
-                                  fill="Black", width=GRID_WIDTH)
+                        draw.line(((x - margin_width + grid_spacing, y-1), (x - grid_spacing, y-1)),
+                                  fill="Black", width=grid_width)
+                        draw.line(((x-1, y - margin_height + grid_spacing), (x-1, y - grid_spacing)),
+                                  fill="Black", width=grid_width)
+                        draw.line(((x - margin_width + grid_spacing, y + divider_height),
+                                   (x - grid_spacing, y + divider_height)), fill="Black", width=grid_width)
+                        draw.line(((x - 1, y + divider_height + grid_spacing),
+                                   (x - 1, y + divider_height + margin_height - grid_spacing)),
+                                  fill="Black", width=grid_width)
+                        draw.line(((x + divider_width + grid_spacing, y - 1),
+                                   (x + divider_width + margin_width - grid_spacing, y - 1)),
+                                  fill="Black", width=grid_width)
+                        draw.line(((x + divider_width, y - margin_height + grid_spacing),
+                                   (x + divider_width, y - grid_spacing)), fill="Black", width=grid_width)
+                        draw.line(((x + divider_width, y + divider_height + grid_spacing),
+                                   (x + divider_width, y + divider_height + margin_height - grid_spacing)),
+                                  fill="Black", width=grid_width)
+                        draw.line(((x + divider_width + grid_spacing, y + divider_height),
+                                   (x + divider_width + margin_width - grid_spacing, y + divider_height)),
+                                  fill="Black", width=grid_width)
                 if should_break:
                     break
             pages.append(page)
@@ -196,54 +120,130 @@ class Divider:
                             should_break = True
                             break
                         divider = dividers[index]
-                        x = DIVIDER_OFFSET_WIDTH + (width - x_index - 1) * (DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH)
-                        y = DIVIDER_OFFSET_HEIGHT + y_index * (DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT)
+                        x = offset_width + (width - x_index - 1) * (divider_width + margin_width)
+                        y = offset_height + y_index * (divider_height + margin_height)
                         div_image = divider.render()
                         page.paste(div_image, (x, y))
                         if grid_lines:
-                            draw.line(((x - DIVIDER_MARGIN_WIDTH + GRID_SPACING, y-1), (x - GRID_SPACING, y-1)),
-                                      fill="Black", width=GRID_WIDTH)
-                            draw.line(((x-1, y - DIVIDER_MARGIN_HEIGHT + GRID_SPACING), (x-1, y - GRID_SPACING)),
-                                      fill="Black", width=GRID_WIDTH)
-                            draw.line(((x - DIVIDER_MARGIN_WIDTH + GRID_SPACING, y + DIVIDER_HEIGHT),
-                                       (x - GRID_SPACING, y + DIVIDER_HEIGHT)), fill="Black", width=GRID_WIDTH)
-                            draw.line(((x - 1, y + DIVIDER_HEIGHT + GRID_SPACING),
-                                       (x - 1, y + DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT - GRID_SPACING)),
-                                      fill="Black", width=GRID_WIDTH)
-                            draw.line(((x + DIVIDER_WIDTH + GRID_SPACING, y - 1),
-                                       (x + DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH - GRID_SPACING, y - 1)),
-                                      fill="Black", width=GRID_WIDTH)
-                            draw.line(((x + DIVIDER_WIDTH, y - DIVIDER_MARGIN_HEIGHT + GRID_SPACING),
-                                       (x + DIVIDER_WIDTH, y - GRID_SPACING)), fill="Black", width=GRID_WIDTH)
-                            draw.line(((x + DIVIDER_WIDTH, y + DIVIDER_HEIGHT + GRID_SPACING),
-                                       (x + DIVIDER_WIDTH, y + DIVIDER_HEIGHT + DIVIDER_MARGIN_HEIGHT - GRID_SPACING)),
-                                      fill="Black", width=GRID_WIDTH)
-                            draw.line(((x + DIVIDER_WIDTH + GRID_SPACING, y + DIVIDER_HEIGHT),
-                                       (x + DIVIDER_WIDTH + DIVIDER_MARGIN_WIDTH - GRID_SPACING, y + DIVIDER_HEIGHT)),
-                                      fill="Black", width=GRID_WIDTH)
+                            draw.line(((x - margin_width + grid_spacing, y-1), (x - grid_spacing, y-1)),
+                                      fill="Black", width=grid_width)
+                            draw.line(((x-1, y - margin_height + grid_spacing), (x-1, y - grid_spacing)),
+                                      fill="Black", width=grid_width)
+                            draw.line(((x - margin_width + grid_spacing, y + divider_height),
+                                       (x - grid_spacing, y + divider_height)), fill="Black", width=grid_width)
+                            draw.line(((x - 1, y + divider_height + grid_spacing),
+                                       (x - 1, y + divider_height + margin_height - grid_spacing)),
+                                      fill="Black", width=grid_width)
+                            draw.line(((x + divider_width + grid_spacing, y - 1),
+                                       (x + divider_width + margin_width - grid_spacing, y - 1)),
+                                      fill="Black", width=grid_width)
+                            draw.line(((x + divider_width, y - margin_height + grid_spacing),
+                                       (x + divider_width, y - grid_spacing)), fill="Black", width=grid_width)
+                            draw.line(((x + divider_width, y + divider_height + grid_spacing),
+                                       (x + divider_width, y + divider_height + margin_height - grid_spacing)),
+                                      fill="Black", width=grid_width)
+                            draw.line(((x + divider_width + grid_spacing, y + divider_height),
+                                       (x + divider_width + margin_width - grid_spacing, y + divider_height)),
+                                      fill="Black", width=grid_width)
                     if should_break:
                         break
                 pages.append(page)
         return pages
 
+    def resolve_position(self, position: Tuple[Union[int, str], Union[int, str]],
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) -> \
+            Tuple[int, int]:
+            result = []
+            if position[0] == "auto":
+                result.append(current_x)
+            else:
+                result.append(int(position[0]))
+            if position[1] == "auto":
+                result.append(current_y)
+            else:
+                result.append(int(position[1]))
+            return result[0], result[1]
+
+    def render_container(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) ->\
+            Tuple[int, int]:
+        new_bounding_box = (self.resolve_position(draw_property["position"], bounding_box, current_x, current_y),
+                            draw_property["size"])
+        for recursive_draw_property in draw_property["properties"]:
+            prev_current_x = current_x
+            prev_current_y = current_y
+            current_x, current_y = self.render_property(result, draw, recursive_draw_property, new_bounding_box, current_x, current_y)
+            if prev_current_x != current_x:
+                current_x += draw_property["spacing"]
+            if prev_current_y != current_y:
+                current_y += draw_property["spacing"]
+        return current_x, current_y
+
+    def render_text(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) ->\
+            Tuple[int, int]:
+        font = ImageFont.truetype(draw_property["font"], draw_property["font_size"])
+        text = self.properties.get(draw_property["property"])
+        current_x, current_y = self.resolve_position(draw_property["position"], bounding_box, current_x, current_y)
+        if text is not None:
+            background = self.properties.get(draw_property["background_property"])
+            if background is None:
+                background = draw_property["background_default"]
+            text_color = self.properties.get(draw_property["text_color_property"])
+            if text_color is None:
+                text_color = draw_property["text_color_default"]
+            text_width, text_height = draw.textsize(text, font)
+            desired_width = draw_property["size"][0] if draw_property["size"][0] != "auto" else text_width
+            desired_height = draw_property["size"][1] if draw_property["size"][1] != "auto" else text_height
+            draw.rectangle(((current_x, current_y), (current_x + desired_width, current_y + desired_height)),
+                           fill=background)
+            # CodeReview: center between current_y and bottom of bounding box
+            x_coord = (current_x + (desired_width - text_width) // 2) if draw_property["centered_width"] else current_x
+            y_coord = (current_y + (desired_height - text_height) // 2) if draw_property["centered_height"] else current_y
+            draw.text((x_coord, y_coord), text, fill=text_color, font=font)
+            current_x += desired_width
+        elif draw_property["required"]:
+            raise Exception(f"Missing required property: {draw_property['property']} from card {self.properties}")
+        return current_x, current_y
+
+    def render_list(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) ->\
+            Tuple[int, int]:
+        ...
+
+    def render_colorbar(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) ->\
+            Tuple[int, int]:
+        ...
+
+    def render_image(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                         bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) ->\
+            Tuple[int, int]:
+        ...
+
+    def render_property(self, result: Image, draw: ImageDraw, draw_property: Mapping,
+                        bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int) -> \
+            Tuple[int, int]:
+        if draw_property["type"] == "container":
+            return self.render_container(result, draw, draw_property, bounding_box, current_x, current_y)
+        elif draw_property["type"] == "text":
+            return self.render_text(result, draw, draw_property, bounding_box, current_x, current_y)
+        elif draw_property["type"].startswith("list["):
+            return self.render_list(result, draw, draw_property, bounding_box, current_x, current_y)
+        elif draw_property["type"] == "colorbar":
+            return self.render_colorbar(result, draw, draw_property, bounding_box, current_x, current_y)
+        elif draw_property["type"] == "image":
+            return self.render_image(result, draw, draw_property, bounding_box, current_x, current_y)
 
     def render(self) -> Image:
-        result = Image.new("RGBA", (DIVIDER_WIDTH, DIVIDER_HEIGHT), "White")
+        result = Image.new("RGBA", (self.format["width"], self.format["height"]), "White")
         draw = ImageDraw.Draw(result)
+        for draw_property in self.format["properties"]:
+            self.render_property(result, draw, draw_property, ((0, 0), (self.format["width"], self.format["height"])),
+                                 0, 0)
         if self.image is not None:
             result.paste(self.image, (0, LABEL_HEIGHT))
-        current_x: int = 0
-        font = ImageFont.truetype("resources/KOMIKAX_.ttf", NAME_TYPE_FONT_SIZE)
-        if self.card_type is not None:
-            draw.rectangle(((current_x, 0), (current_x + TYPE_BOX_WIDTH, LABEL_HEIGHT)), fill=self.type_background)
-            text_width, text_height = draw.textsize(self.card_type, font)
-            draw.text((current_x + (TYPE_BOX_WIDTH - text_width)//2, (LABEL_HEIGHT - text_height)//2), self.card_type,
-                      fill=self.type_color, font=font)
-            current_x += TYPE_BOX_WIDTH
-        text_width, text_height = draw.textsize(self.name, font)
-        draw.text((current_x + NAME_MARGIN_WIDTH, (LABEL_HEIGHT - text_height)//2), self.name, fill="Black", font=font)
-        current_x += text_width + NAME_MARGIN_WIDTH
-        team_x = DIVIDER_WIDTH - COLOR_BAR_WIDTH - ICON_SPACING - ICON_WIDTH
+        team_x = divider_width - COLOR_BAR_WIDTH - ICON_SPACING - ICON_WIDTH
         if self.teams is None or len(self.teams) == 0:
             team_x += ICON_WIDTH + ICON_SPACING
         total_color = sum(amount for amount in self.color_distribution.values())
@@ -291,7 +291,7 @@ class Divider:
                 icon = Image.open(f"resources/icons/{team}.png")
                 icon = icon.resize((ICON_WIDTH, ICON_HEIGHT), Image.HAMMING)
                 result.paste(icon, (current_x, LABEL_HEIGHT // 2 + (LABEL_HEIGHT // 2 - ICON_HEIGHT) // 2))
-        current_x = DIVIDER_WIDTH - COLOR_BAR_WIDTH
+        current_x = divider_width - COLOR_BAR_WIDTH
         if total_color > 0:
             color_value = {"Y": 0, "U": 1, "B": 2, "R": 3, "G": 4, "YU": 5, "UB": 6, "BR": 7, "RG": 8, "GY": 9,
                            "YB": 10, "UR":11, "BG": 12, "RY": 13, "GU": 14, "E": 15, "W": -1}
