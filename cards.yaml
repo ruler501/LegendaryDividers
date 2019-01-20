@@ -17,7 +17,7 @@ player: &player
   type_color: "White"
   image: "player"
   teams: ["shield"]
-clear: &clear !python/tuple [0, 0, 0, 0]
+clear: &clear !!python/tuple [0, 0, 0, 0]
 font: &font "resources/KOMIKAX_.ttf"
 # END BOILERPLATE
 
@@ -30,8 +30,8 @@ width_count: 2
 height_count: 3
 page_width: 1700
 page_height: 2200
-divider_width: @divider_width 728
-divider_height: @divider_height 592
+divider_width: &divider_width 728
+divider_height: &divider_height 592
 offset_height: 100
 offset_width: 90
 margin_width: 80
@@ -39,18 +39,19 @@ margin_height: 100
 format:
   width: *divider_width
   height: *divider_height
+  icon_height: &icon_height 32
   properties:
     - position: [0, 0]
-      size: [*divider_width, @label_height 72]
+      size: [*divider_width, &label_height 72]
       type: "container"
       spacing: 8
-      icon_width: 30
+      backwards: False
       properties:
         - property: "card_type"
           required: False
           position: [0, 0]
           size: [185, *label_height]
-          type: "Text"
+          type: "text"
           background_property: "type_background"
           background_default: "Black"
           text_color_property: "type_color"
@@ -65,53 +66,61 @@ format:
           size: ["auto", *label_height]
           type: "text"
           background_property: null
-          background_default: *clear
+          background_default: "White"
           text_color_property: "name_color"
           text_color_default: "Black"
           font: *font
           font_size: 24
           centered_width: False
           centered_height: True
-        - property: "themes"
-          required: False
+        - type: "container"
           position: ["auto", 0]
           size: ["auto", *label_height]
-          type: "list[iconsandtext]"
-          text_color_property: "themes_color"
-          text_color_default: "Black"
-          font: *font
-          font_size: 12
-          centered_width: False
-          centered_height: True
-          rows: 2
-          columns: null
+          type: "container"
           spacing: 8
-          orientation: "horizontal"
-          bulleted: False
-          wrap: null
-        - property: "teams"
-          required: False
-          position: [448, 0]
-          size: [*icon_width, *label_height]
-          type: "list[icons]"
-          centered_height: True
-          centered_width: True
-          rows: 2
-          columns: null
-          spacing: 8
-          orientation: "vertical"
-          bulleted: False
-          wrap: null
-        - property: "colors"
-          required: False
-          position: [485, 0]
-          size: [243, *label_height]
-          type: "colorbar"
+          backwards: True
+          properties:
+          - property: "colors"
+            required: False
+            position: [728, 0]
+            size: [180, *label_height]
+            type: "colorbar"
+          - property: "teams"
+            required: False
+            position: ["auto", 0]
+            size: [*icon_height, *label_height]
+            type: "list[icons]"
+            centered_height: True
+            centered_width: True
+            rows: 2
+            columns: null
+            spacing: 8
+            orientation: "vertical"
+            bulleted: False
+            wrap: null
+          - property: "themes"
+            required: False
+            position: ["auto", 0]
+            size: ["auto", *label_height]
+            type: "list[iconsandtext]"
+            text_color_property: "themes_color"
+            text_color_default: "Black"
+            font: *font
+            font_size: 12
+            centered_width: False
+            centered_height: True
+            rows: 2
+            columns: null
+            spacing: 8
+            orientation: "horizontal"
+            bulleted: False
+            wrap: null
     - property: "image"
       position: [0, *label_height]
       size: [*divider_width, &image_height 520]
       type: "image"
     - property: "notes"
+      required: False
       position: [0, *label_height]
       size: [*divider_width, *image_height]
       type: "list[text]"
@@ -127,7 +136,7 @@ format:
       orientation: "vertical"
       bulleted: True
       wrap: 70
-populate_from_rarity:
+populate_from_rarities:
   rarities:
     common1: 5
     common2: 5
