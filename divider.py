@@ -168,13 +168,15 @@ class Divider:
                          bounding_box: Tuple[Tuple[int, int], Tuple[int, int]], current_x: int, current_y: int,
                          backwards: bool) -> Tuple[int, int]:
         new_bounding_box = [self.resolve_position(draw_property["position"], bounding_box, current_x, current_y),
-                            draw_property["size"]]
+                            list(draw_property["size"])]
         # CodeReview: Need to handle that when backwards is set new_bounding_box[0][0] needs to be the right
         #   boundary not the left
+        print(draw_property)
+        print("ContainerPre", backwards, current_x, bounding_box, new_bounding_box)
         if new_bounding_box[1][0] == "auto":
             new_bounding_box[1][0] = bounding_box[1][0] - new_bounding_box[0][0] + bounding_box[0][0]
             if backwards:
-                new_bounding_box[1][0] = current_x - bounding_box[1][0]
+                new_bounding_box[1][0] = current_x - bounding_box[1][0] + bounding_box[0][0]
                 new_bounding_box[0][0] = bounding_box[1][0]
         if new_bounding_box[1][1] == "auto":
             new_bounding_box[1][1] = bounding_box[1][1] - new_bounding_box[0][1] + bounding_box[0][1]
@@ -182,13 +184,16 @@ class Divider:
         if new_backwards:
             current_x = new_bounding_box[0][0] + new_bounding_box[1][0]
         new_bounding_box = new_bounding_box[0], new_bounding_box[1]
+        print("Container", new_backwards, new_bounding_box, current_x)
         for recursive_draw_property in draw_property["properties"]:
             prev_current_x = current_x
             prev_current_y = current_y
+            cached_x = current_x
             current_x, current_y = self.render_property(result, draw, recursive_draw_property, new_bounding_box,
                                                         current_x, current_y, new_backwards)
             if prev_current_x != current_x:
                 current_x += draw_property["spacing"] if not new_backwards else -draw_property["spacing"]
+                print("XChanged", cached_x, current_x)
             if prev_current_y != current_y:
                 current_y += draw_property["spacing"]
         return current_x, current_y
@@ -232,13 +237,13 @@ class Divider:
         items = self.properties.get(draw_property["property"])
         current_x, current_y = self.resolve_position(draw_property["position"], bounding_box, current_x, current_y)
         size_x, size_y = draw_property["size"]
-        print(draw_property["property"], current_x, current_y, backwards)
         if size_x == "auto":
             size_x = bounding_box[1][0] - current_x + bounding_box[0][0]
             if backwards:
                 size_x = current_x - bounding_box[0][0]
         if size_y == "auto":
             size_y = bounding_box[1][1] - current_y + bounding_box[0][1]
+        print(current_x, size_x, backwards)
         if backwards:
             current_x = current_x - size_x
         orientation = draw_property["orientation"]
@@ -280,12 +285,13 @@ class Divider:
                             and rows is not None and internal_current_y < current_y + (rows - 1) * (size_y // rows):
                         internal_current_y += size_y // rows
                         internal_current_x = cached_current_x
+                        x_coord = internal_current_x
+                        y_coord += size_y // rows
                     elif orientation == "vertical" and y_coord + icon_height > y_border \
                             and columns is not None and \
                             internal_current_x < current_x + (columns - 1) * (size_y // columns):
                         internal_current_x += size_x // rows
                         internal_current_y = cached_current_y
-                    print(item, x_coord, y_coord, x_border, x_coord + icon_width)
                     result.paste(icon, (x_coord, y_coord))
                     if orientation == "horizontal":
                         internal_current_x = x_coord + icon_width
@@ -319,6 +325,7 @@ class Divider:
                         first = False
                         if draw_property["centered_width"]:
                             x_coord += (size_x // (columns or 1) - text_width) // 2
+                    print(x_coord, text_width, x_border, cached_current_x, internal_current_y)
                     if orientation == "horizontal" and x_coord + text_width > x_border \
                             and rows is not None and internal_current_y < current_y + (rows - 1) * (size_y // rows):
                         internal_current_y += size_y // rows
@@ -330,7 +337,6 @@ class Divider:
                             internal_current_x < current_x + (columns - 1) * (size_y // columns):
                         internal_current_x += size_x // rows
                         internal_current_y = cached_current_y
-                    print(item, x_coord, y_coord, x_border, x_coord + text_width)
                     if draw_property["wrap"] is None:
                         draw.text((x_coord, y_coord), item, fill=text_color, font=theme_font)
                     else:
@@ -369,24 +375,26 @@ class Divider:
                 # CodeReview: Support auto sizing
                 if backwards:
                     current_x -= draw_property["size"][0]
+                print(self.properties["name"], current_x, draw_property["size"])
                 for color in colors:
                     bar_width = color_distribution[color] * draw_property["size"][0] // total_color
                     if len(color) == 1:
                         draw.rectangle(((current_x, current_y),
                                         (current_x + bar_width, current_y + draw_property["size"][1])),
                                        fill=color_to_color[color])
-                        print(self.properties["name"], current_x, bar_width, color, draw_property["size"][1])
+                        print(current_x, bar_width, color, draw_property["size"][1])
                     elif len(color) == 2:
                         color1, color2 = color
                         draw.rectangle(((current_x, current_y),
                                         (current_x + bar_width, current_y + draw_property["size"][1] // 2)),
                                        fill=color_to_color[color1])
-                        draw.rectangle(((current_x, draw_property["size"][1] // 2),
+                        draw.rectangle(((current_x, current_y + draw_property["size"][1] // 2),
                                         (current_x + bar_width, current_y + draw_property["size"][1])),
                                        fill=color_to_color[color2])
+                        print(current_x, bar_width, color1, color2, draw_property["size"][1])
                     current_x += bar_width
-        if backwards:
-            current_x -= draw_property["size"][0]
+            if backwards:
+                current_x -= draw_property["size"][0]
         return current_x, current_y
 
     def render_image(self, result: Image, _: ImageDraw, draw_property: Mapping,

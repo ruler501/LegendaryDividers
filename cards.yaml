@@ -76,13 +76,12 @@ format:
         - type: "container"
           position: ["auto", 0]
           size: ["auto", *label_height]
-          type: "container"
           spacing: 8
           backwards: True
           properties:
           - property: "colors"
             required: False
-            position: [728, 0]
+            position: ["auto", 0]
             size: [180, *label_height]
             type: "colorbar"
           - property: "teams"
@@ -260,7 +259,7 @@ cards:
   - <<: *mastermind
     name: "Illuminati, Secret Society"
     image: "illuminati"
-    themes: ["transforms", "Outwit", "Discard", "Draw is Loot", "Negative Fight"]
+    themes: ["transforms", "Outwit", "Discard", "Draw is Loot"] # , "Negative Fight"]
   - <<: *mastermind
     name: "Zombie Green Goblin"
     image: "zombiegreengoblin"
@@ -268,7 +267,7 @@ cards:
   - <<: *mastermind
     name: "Madelyne Pryor, Goblin Queen"
     image: "goblinqueen"
-    themes: ["wound", "Human Shields", "Negative Fight"]
+    themes: ["wound", "Human Shields"] #, "Negative Fight"]
   - <<: *mastermind
     name: "Wasteland Hulk"
     image: "wastelandhulk"
@@ -304,15 +303,15 @@ cards:
   - <<: *mastermind
     name: "Charles Xavier, Professor of Crime"
     image: "xaviercrime"
-    themes: ["Grows", "Hidden Witnesses", "Mostly Negative Fight"]
+    themes: ["Grows"] #, "Hidden Witnesses", "Mostly Negative Fight"]
   - <<: *mastermind
     name: "The Goblin, Underworld Boss"
     image: "goblinunderworld"
-    themes: ["wound", "Hidden Witnesses", "Mostly Negative Fight"]
+    themes: ["wound", "Hidden Witnesses"] #, "Mostly Negative Fight"]
   - <<: *mastermind
     name: "Baron Heinrich Zemo"
     image: "baronzemo"
-    themes: ["wound", "Savior", "Recruit to Rescue Bystanders", "Mostly Negative Fight"]
+    themes: ["wound", "Savior", "Recruit to Rescue Bystanders"] #, "Mostly Negative Fight"]
   - <<: *mastermind
     name: "Arnim Zola"
     image: "arnimzola"
@@ -347,15 +346,11 @@ cards:
     name: "Thor Corps"
     image: "thorcorps"
     themes: ["strength", "ranged", "Fight: Gain as Hero"]
-    color: "GU"
+    colors: ["GU"]
   - <<: *henchmen
     name: "Cytoplasmic Spikes"
     image: "cytoplasmicspikes"
     themes: ["Fight: Feast, non-grey gain 2 recruit"]
-  - <<: *henchmen
-    name: "Sentinel"
-    image: "sentinel"
-    themes: ["Fight: KO a Hero"]
   - <<: *henchmen
     name: "Sentinel"
     image: "sentinel"
@@ -367,7 +362,7 @@ cards:
   - <<: *henchmen
     name: "Savage Land Mutates"
     image: "savagelandmutants"
-    themes: ["Fight: Hand size increase by 1"]
+    themes: ["Fight: Hand size increased by 1"]
   - <<: *henchmen
     name: "Death's Heads"
     image: "deathsheads"
@@ -379,7 +374,7 @@ cards:
   - <<: *henchmen
     name: "The Brood"
     image: "brood"
-    themes: ["+1 for KO Bystanders", "Fight: KO a Hero and Bystander"]
+    themes: ["+1 for KO'd Bystanders", "Fight: KO a Hero and Bystander"]
   - <<: *henchmen
     name: "M.O.D.O.K.S"
     image: "modoks"
@@ -387,7 +382,7 @@ cards:
   - <<: *henchmen
     name: "Ghost Racers"
     image: "ghostracers"
-    themes: ["Rise of the Living Dead", "Fight: Reveal R or KO a hero with attack"]
+    themes: ["Rise of the Living Dead", "Fight: Reveal Covert or KO a hero with attack"]
   - <<: *villain
     name: "Shadow-X"
     image: "shadowx"
@@ -412,11 +407,11 @@ cards:
   - <<: *villain
     name: "Sisterhood of Mutants"
     image: "sisterhoodofmutants"
-    themes: ["instinct", "Dominate", "KO a hero", "Ascend", "Trap", "Shuffle back in"]
+    themes: ["instinct", "Dominate", "KO a hero", "Ascend", "Shuffle back in"] #, "Trap"]
   - <<: *villain
     name: "Dark Descendants"
     image: "darkdescendants"
-    themes: ["ranged", "KO a hero", "Dominate", "Trap", "Gain as hero", "X-Gene"]
+    themes: ["ranged", "KO Hero", "Dominate", "Gain as Hero"] #, "X-Gene", "Trap"]
     colors: ["U", "W", "W", "W"]
   - <<: *villain
     name: "Spider-Foes"
@@ -433,7 +428,7 @@ cards:
   - <<: *villain
     name: "Masters of Evil"
     image: "mastersofevil"
-    themes: ["tech", "avengers", "wound", "City Space", "KO Hero", "Optional Revealed Feast", "Bystander", "Extra VP"]
+    themes: ["tech", "avengers", "wound", "City Space", "KO Hero", "Reveal can Feast", "Bystanders", "Extra VP"]
   - <<: *villain
     name: "Brotherhood"
     image: "brotherhood"
@@ -453,7 +448,7 @@ cards:
   - <<: *villain
     name: "Domain of Apocalypse"
     image: "domainofapocalypse"
-    themes: ["draw", "xmen", "Teleport", "Free Acquire", "KO Hero", "CDR", "Ascend"]
+    themes: ["draw", "xmen", "Teleport", "CDR", "Free Acquire", "KO Hero", "Ascend"]
   - <<: *villain
     name: "Sentinel Territories"
     image: "sentinelterritories"
@@ -461,8 +456,8 @@ cards:
   - <<: *villain
     name: "Aspects of the Void"
     image: "aspectsofthevoid"
-    themes: ["Wounded Fury", "Bystander", "Extra Recruit", "Pass Right", "Feast", "Free Acquire", "Trap",
-             "Extra Master Strike"]
+    themes: ["Wounded Fury", "Bystanders", "Extra Recruit", "Pass Right", "Feast"] #, "Free Acquire", "Trap",
+             #"Extra Master Strike"]
   - <<: *villain
     name: "Code Red"
     image: "codered"
@@ -482,7 +477,7 @@ cards:
   - <<: *villain
     name: "Manhattan(Earth-1610)"
     image: "manhattan1610"
-    themes: ["CDR", "Gain as Hero", "Class count", "Teleport", "ranged", "covert"]
+    #themes: ["Gain as Hero", "CDR", "ranged", "covert", "Class count", "Teleport"]
     colors: ["G", "U", "U", "R"]
   - <<: *villain
     name: "Limbo"
@@ -495,7 +490,7 @@ cards:
   - <<: *villain
     name: "Master of Evil(WWII)"
     image: "mastersofevilwwii"
-    themes: ["draw", "wound", "Bystander", "KO Hero", "Savior", "Optional Revealed Feast"]
+    themes: ["draw", "wound", "Bystander", "Savior", "KO Hero", "Reveal can Feast"]
   - <<: *villain
     name: "Warbound"
     image: "warbound"
@@ -511,8 +506,798 @@ cards:
   - <<: *villain
     name: "The Deadlands"
     image: "deadlands"
-    themes: ["avengers", "shield", "covert", "wound", "strength", "Rise of the Living Dead", "Bystander", "KO Hero",
-             "Add tactic", "Ascend", "Discard"]
+    themes: ["avengers", "shield", "covert", "wound", "strength", "Bystanders", "Rise of the Living Dead", "KO Hero",
+             "Ascend", "Add tactic"] #, "Discard"]
+  - name: "Black Panther"
+    common1:
+      color: "RY"
+    common2:
+      color: "BG"
+    uncommon:
+      color: "RG"
+    rare:
+      color: "YB"
+    image: "blackpanther"
+    teams: ["illuminati"]
+    themes: ["illuminati", "draw", "MC Matters", "Sidekicks", "KO"]
+  - name: "Maximus"
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "BR"
+    rare:
+      color: "B"
+    image: "maximus"
+    teams: ["cabal"]
+    themes: ["covert", "tech", "cabal", "Henchmen", "Sidekicks"]
+  - name: "Proxima Midnight"
+    common1:
+      color: "RY"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "proximamidnight"
+    teams: ["cabal"]
+    themes: ["instinct", "covert", "recruit", "Symbol", "attack", "Symbol"]
+  - name: "Superior Iron Man"
+    common1:
+      color: "B"
+    common2:
+      color: "B"
+    uncommon:
+      color: "U"
+    rare:
+      color: "B"
+    image: "superiorironman"
+    teams: ["illuminati"]
+    themes: ["tech", "ranged", "draw", "Diverse Costs", "Victory Pile"]
+  - name: "Thanos"
+    common1:
+      color: "GU"
+    common2:
+      color: "G"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "thanos"
+    teams: ["cabal"]
+    themes: ["cabal", "ranged", "KO Bystander", "Free Defeat"]
+  - name: "Lady Thor"
+    common1:
+      color: "U"
+    common2:
+      color: "G"
+    uncommon:
+      color: "GU"
+    rare:
+      color: "G"
+    image: "ladythor"
+    teams: ["avengers"]
+    themes: ["strength", "ranged", "6recruit"]
+  - name: "No-Name, Brood Queen"
+    common1:
+      color: "R"
+    common2:
+      color: "R"
+    uncommon:
+      color: "RG"
+    rare:
+      color: "Y"
+    image: "nonamebroodqueen"
+    teams: ["warbound"]
+    themes: ["draw", "topcard", "transforms", "Feast", "KO"]
+  - name: "Miek the Unhived"
+    common1:
+      color: "Y"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "RG"
+    image: "miektheunhived"
+    teams: ["warbound"]
+    themes: ["instinct", "topcard", "transforms", "attack", "Symbol", "Feast", "KO From Deck Matters"]
+  - name: "Caiera"
+    common1:
+      color: "R"
+    common2:
+      color: "R"
+    uncommon:
+      color: "G"
+    rare:
+      color: "GY"
+    image: "caiera"
+    teams: ["warbound"]
+    themes: ["covert", "draw", "transforms", "Outwit", "Smash", "KO"]
+  - name: "Gambit"
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "gambit"
+    teams: ["xmen"]
+    themes: ["xmen", "topcard", "draw", "Top Card Manip"]
+  - name: "Korg"
+    common1:
+      color: "G"
+    common2:
+      color: "G"
+    uncommon:
+      color: "RG"
+    rare:
+      color: "G"
+    image: "korg"
+    teams: ["warbound"]
+    themes: ["strength", "transforms", "Draw", "Outwit", "Smash", "KO Wound", "attack", "in HQ"]
+  - name: "Joe Fixit, Grey Hulk"
+    common1:
+      color: "G"
+    common2:
+      color: "R"
+    uncommon:
+      color: "GY"
+    rare:
+      color: "R"
+    image: "greyhulk"
+    teams: ["CrimeSyndicate"]
+    themes: ["strength", "transform", "Smash", "Bribe", "VP"]
+  - name: "Hulkbuster Iron Man"
+    common1:
+      color: "G"
+    common2:
+      color: "B"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "hulkbusterironman"
+    teams: ["avengers"]
+    themes: ["tech", "strength", "draw", "transforms", "Smash", "Outwit"]
+  - name: "Thor"
+    common1:
+      color: "G"
+    common2:
+      color: "U"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "thor"
+    teams: ["avengers"]
+    themes: ["strength", "ranged", "8recruit", "Bribe"]
+  - name: "Gladiator Hulk"
+    common1:
+      color: "G"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "gladiatorhulk"
+    teams: ["warbound"]
+    themes: ["strength", "draw", "transforms", "Smash", "Discard Matters", "Discard Replace"]
+  - name: "Agent X-13"
+    common1:
+      color: "U"
+    common2:
+      color: "B"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "agentx13"
+    teams: ["shield"]
+    themes: ["covert", "shield", "Man out of Time", "Shield Officer", "KO-", "shield", "Savior"]
+  - name: "Hulk"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "hulk"
+    teams: ["avengers"]
+    themes: ["strength", "Give Wounds", "KO Wounds"]
+  - name: "Wolverine"
+    common1:
+      color: "Y"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "wolverine"
+    teams: ["xmen"]
+    themes: ["instinct", "draw", "KO Wound", "Draw Matters"]
+  - name: "Cyclops"
+    common1:
+      color: "G"
+    common2:
+      color: "U"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "cyclops"
+    teams: ["xmen"]
+    themes: ["xmen", "Discard", "Discard Replace"]
+  - name: "Deadpool"
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "deadpool"
+    themes: ["Odd cost", "Bystanders", "Mulligan", "Pass Cards"]
+  - name: "X-23"
+    common1:
+      color: "Y"
+    common2:
+      color: "B"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "x23"
+    teams: ["xmen"]
+    themes: ["xgeneinstinct", "draw", "Berserk", "KO Wound", "KO"]
+  - name: "Ultimate Spider Man"
+    common1:
+      color: "G"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "B"
+    rare:
+      color: "R"
+    image: "ultimatespiderman"
+    teams: ["spiderman"]
+    themes: ["2cost", "draw", "topcard", "strength", "Sidekick", "City Space"]
+  - name: "Storm"
+    common1:
+      color: "U"
+    common2:
+      color: "U"
+    uncommon:
+      color: "R"
+    rare:
+      color: "U"
+    image: "storm"
+    teams: ["xmen"]
+    themes: ["ranged", "draw", "City Space", "Extra Villain", "Bystanders"]
+  - name: "Iron Man"
+    common1:
+      color: "B"
+    common2:
+      color: "U"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "ironman"
+    teams: ["avengers"]
+    themes: ["tech", "ranged", "draw"]
+  - name: "Emma Frost"
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "G"
+    image: "emmafrost"
+    teams: ["xmen"]
+    themes: ["covert", "draw", "xmen", "Extra Villain", "Free Defeat"]
+  - name: "Black Widow"
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "blackwidow"
+    teams: ["avengers"]
+    themes: ["covert", "text", "draw", "KO", "Bystander", "Free Defeat"]
+  - name: "Spider Man"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "B"
+    rare:
+      color: "R"
+    image: "spiderman"
+    teams: ["spiderman"]
+    themes: ["2cost", "draw", "topcard", "Bystander"]
+  - name: "Nick Fury"
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "G"
+    rare:
+      color: "B"
+    image: "nickfury"
+    teams: ["shield"]
+    themes: ["tech", "shield", "Replace Shield With Officer"]
+  - name: "Cannonball"
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "cannonball"
+    teams: ["xmen"]
+    themes: ["strength", "instinct", "xgeneshield", "Soaring Flight", "Draw Matters"]
+  - name: "Rogue"
+    common1:
+      color: "R"
+    common2:
+      color: "G"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "rogue"
+    teams: ["xmen"]
+    themes: ["covert", "strength", "KO", "Clone"]
+  - name: "Namora"
+    common1:
+      color: "U"
+    common2:
+      color: "R"
+    uncommon:
+      color: "GU"
+    rare:
+      color: "R"
+    image: "namora"
+    teams: ["champions"]
+    themes: ["ranged", "covert", "draw", "transforms", "Smash", "KO 0-Cost", "City Space"]
+  - name: "Magik"
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "R"
+    image: "magik"
+    teams: ["xmen"]
+    themes: ["covert", "ranged", "Sidekick", "Teleport", "VP"]
+  - name: "Dr. Strange"
+    common1:
+      color: "YU"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "R"
+    image: "drstrange"
+    teams: ["illuminati"]
+    themes: ["illuminati", "ranged", "draw", "instict", "KO", "Teleport", "Top Villain"]
+  - name: "Captain America"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "B"
+    rare:
+      color: "R"
+    image: "captainamerica"
+    teams: ["avengers"]
+    themes: ["avengers", "draw", "Hero Class Count", "Wound Replace"]
+  - name: "Luke Cage Noir"
+    common1:
+      color: "G"
+    common2:
+      color: "R"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "lukecagenoir"
+    teams: ["MarvelKnights"]
+    themes: ["4cost", "Investigate", "Wound Replace"]
+  - name: "Kitty Pryde"
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "B"
+    rare:
+      color: "U"
+    image: "kittypryde"
+    teams: ["xmen"]
+    themes: ["xgenexmen", "draw", "recruit", "Symbol", "attack", "Symbol", "HQ Manip", "HQ Cost", "Soaring Flight"]
+  - name: "Hawkeye"
+    common1:
+      color: "Y"
+    common2:
+      color: "B"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "hawkeye"
+    teams: ["avengers"]
+    themes: ["tech", "avengers", "draw", "Team Draw or Discard", "Bystanders"]
+  - name: "Polaris"
+    common1:
+      color: "U"
+    common2:
+      color: "R"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "polaris"
+    teams: ["xmen"]
+    themes: ["ranged", "covert", "xgenexmen", "piercing", "draw", "topcard", "Soaring Flight", "Increase Hand Size", "KO", "Bribe"]
+  - name: "Phoenix"
+    common1:
+      color: "G"
+    common2:
+      color: "U"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "phoenix"
+    teams: ["xmen"]
+    themes: ["piercing", "draw", "Self KO", "KO", "Recover KO", "Soaring Flight", "Berserk", "Alt-Win"]
+  - name: "Hiroim"
+    common1:
+      color: "R"
+    common2:
+      color: "RG"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "hiroim"
+    teams: ["warbound"]
+    themes: ["covert", "warbound", "draw", "transforms", "Bystanders", "KO 0-Cost"]
+  - name: "Legion"
+    common1:
+      color: "RG"
+    common2:
+      color: "UB"
+    uncommon:
+      color: "YB"
+    rare:
+      color: "R"
+    image: "legion"
+    teams: ["xmen"]
+    themes: ["draw", "piercing", "Split", "Berserk", "Lightshow", "Classes in Discard", "Top Hero Deck"]
+  - name: "Psylocke"
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "psylocke"
+    teams: ["xmen"]
+    themes: ["instinct", "xgenecovert", "draw", "piercing", "Top Hero Deck", "Free Acquire to Hand"]
+  - name: "Havok"
+    common1:
+      color: "U"
+    common2:
+      color: "U"
+    uncommon:
+      color: "U"
+    rare:
+      color: "B"
+    image: "havok"
+    teams: ["xmen"]
+    themes: ["xgeneranged", "Discard", "Berserk", "Lightshow"]
+  - name: "Jubilee"
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "R"
+    image: "jubilee"
+    teams: ["xmen"]
+    themes: ["draw", "topcard", "Lightshow", "KO 0-Cost"]
+  - name: "Dazzler"
+    common1:
+      color: "Y"
+    common2:
+      color: "U"
+    uncommon:
+      color: "B"
+    rare:
+      color: "U"
+    image: "dazzler"
+    teams: ["xmen"]
+    themes: ["piercing", "Lightshow", "Increase Hand Size", "Free Acquire to Top"]
+  - name: "Colossus & Wolverine"
+    common1:
+      color: "GY"
+    common2:
+      color: "G"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "G"
+    image: "colossuswolverine"
+    teams: ["xmen"]
+    themes: ["xgeneinstinct", "draw", "xmen", "Gain Wound", "KO Wound", "Berserk", "Soaring Flight", "Split"]
+  - name: "Longshot"
+    common1:
+      color: "Y"
+    common2:
+      color: "B"
+    uncommon:
+      color: "R"
+    rare:
+      color: "B"
+    image: "longshot"
+    teams: ["xmen"]
+    themes: ["tech", "covert", "xmen", "From Hand to Top", "Berserk", "Top Card Manip", "Feast", "Top Villain"]
+  - name: "Beast"
+    common1:
+      color: "G"
+    common2:
+      color: "B"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "beast"
+    teams: ["xmen"]
+    themes: ["xgenetech", "xgenestrength", "Berserk", "Top Card Manip", "Return from Discard"]
+  - name: "Banshee"
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "banshee"
+    teams: ["xmen"]
+    themes: ["ranged", "covert", "xgenecovert", "draw", "piercing", "Soaring Flight"]
+  - name: "Aurora & Northstar"
+    common1:
+      color: "R"
+    common2:
+      color: "GU"
+    uncommon:
+      color: "U"
+    rare:
+      color: "Y"
+    image: "auroranorthstar"
+    teams: ["xmen"]
+    themes: ["draw", "Split", "Berserk", "Lightshow", "Soaring Flight"]
+  - name: "Daredevil Noir"
+    common1:
+      color: "R"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "daredevilnoir"
+    teams: ["MarvelKnights"]
+    themes: ["covert", "topcard", "Wall Crawl", "Investigate", "KO 0-Cost", "Bottom Card"]
+  - name: "Bruce Banner"
+    common1:
+      color: "B"
+    common2:
+      color: "BG"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "brucebanner"
+    teams: ["avengers"]
+    themes: ["tech", "transforms", "draw", "topcard", "Increase Hand Size", "Smash", "KO 0-Cost"]
+  - name: "Old Man Logan"
+    common1:
+      color: "Y"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "oldmanlogan"
+    teams: ["xmen"]
+    themes: ["instinct", "KO", "0 Recruit", "CDR", "Anti-", "shield", "-", "hydra"]
+  - name: "Black Bolt"
+    common1:
+      color: "U"
+    common2:
+      color: "UR"
+    uncommon:
+      color: "G"
+    rare:
+      color: "U"
+    image: "blackbolt"
+    teams: ["illuminati"]
+    themes: ["draw", "Vanilla"]
+  - name: "Angel Noir"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "R"
+    image: "angelnoir"
+    teams: ["xmen"]
+    themes: ["insinct", "Investigate", "Value from HQ", "HQ Manip", "Free Acquire to Hand"]
+  - name: "Namor, the Sub-Mariner"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "GY"
+    rare:
+      color: "G"
+    image: "namorsubmariner"
+    teams: ["cabal"]
+    themes: ["strength", "instinct", "draw", "Sidekick", "City Space", "KO", "Free Defeat"]
+  - name: "Apocalyptic Kitty Pryde"
+    common1:
+      color: "B"
+    common2:
+      color: "R"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "apocalyptickittypryde"
+    teams: ["xmen"]
+    themes: ["covert", "draw", "HQ Manip", "Empower-", "tech", "KO", "Replace Fight Effect"]
+  - name: "Spider-Man Noir"
+    common1:
+      color: "B"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "G"
+    image: "spidermannoir"
+    teams: ["spiderman"]
+    themes: ["2cost", "Investigate", "Bystander"]
+  - name: "Iron Man Noir"
+    common1:
+      color: "B"
+    common2:
+      color: "U"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "ironmannoir"
+    teams: ["avengers"]
+    themes: ["tech", "Investigate", "Put On Top From Hand", "Henchmen"]
+  - name: "Captain America 1941"
+    common1:
+      color: "B"
+    common2:
+      color: "G"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "captainamerica1941"
+    teams: ["avengers"]
+    themes: ["strength", "avengers", "draw", "Savior", "Hero Class Count", "Man Out of Time", "Bystanders"]
+  - name: "Winter Soldier"
+    common1:
+      color: "B"
+    common2:
+      color: "G"
+    uncommon:
+      color: "R"
+    rare:
+      color: "B"
+    image: "wintersoldier"
+    themes: ["tech", "draw", "Man Out of Time", "Draw Matters"]
+  - name: "Steve Rogers, Director of S.H.I.E.L.D"
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "B"
+    image: "steverogersdirector"
+    teams: ["shield"]
+    # themes: ["shield", "Hero Class Count", "Savior", "KO-", "shield", "Bystanders", "Man Out of Time"]
+  - name: "Captain America(Falcon)"
+    common1:
+      color: "Y"
+    common2:
+      color: "U"
+    uncommon:
+      color: "B"
+    rare:
+      color: "R"
+    image: "captainamericafalcon"
+    teams: ["avengers"]
+    themes: ["instinct", "Bystanders", "Hero Class Count", "Savior", "Wound Replace"]
+  - name: "Skaar, Son of Hulk"
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "GY"
+    rare:
+      color: "G"
+    image: "skaar"
+    teams: ["avengers"]
+    themes: ["instinct", "strength", "transforms", "draw", "Smash", "Wounded Fury", "KO Wounds", "Gain Wounds"]
+  - name: "She-Hulk"
+    common1:
+      color: "GY"
+    common2:
+      color: "G"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "shehulk"
+    teams: ["avengers"]
+    themes: ["6recruit", "draw", "transforms", "Outwit", "Smash", "KO", "Top Hero Deck"]
+  - name: "Captain Marvel"
+    common1:
+      color: "U"
+    common2:
+      color: "GU"
+    uncommon:
+      color: "G"
+    rare:
+      color: "U"
+    image: "captainmarvel"
+    teams: ["avengers"]
+    themes: ["strength", "ranged", "draw"]
   - name: "Master Strikes"
     card_type: ""
     type_background: "#766f92"

@@ -5,8 +5,13 @@ import yaml
 
 from typing import List
 
-from divider import DIVIDER_WIDTH, DIVIDER_HEIGHT, DIVIDER_MARGIN_HEIGHT, DIVIDER_MARGIN_WIDTH, DIVIDER_OFFSET_HEIGHT,\
-    DIVIDER_OFFSET_WIDTH, LABEL_HEIGHT
+DIVIDER_WIDTH = 728
+DIVIDER_HEIGHT = 592
+DIVIDER_MARGIN_HEIGHT = 100
+DIVIDER_MARGIN_WIDTH = 80
+DIVIDER_OFFSET_HEIGHT = 100
+DIVIDER_OFFSET_WIDTH = 90
+LABEL_HEIGHT = 72
 
 
 def extract_images(filename: str, names: List[str], width: int = 2, height: int = 3):
@@ -17,8 +22,8 @@ def extract_images(filename: str, names: List[str], width: int = 2, height: int 
     pages = pdf2image.convert_from_path(filename, output_folder="temp")
 
     for page_number, page in enumerate(pages):
-        for x_index in range(width):
-            for y_index in range(height):
+        for y_index in range(height):
+            for x_index in range(width):
                 index = width * height * page_number + width * y_index + x_index
                 if index >= len(names):
                     return
