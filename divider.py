@@ -465,4 +465,4 @@ def main(input_file: str):
 
 
 if __name__ == "__main__":
-    main("cards.yaml")
+    main("cards2.yaml")

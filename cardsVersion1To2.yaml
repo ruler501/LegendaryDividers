@@ -1,0 +1,432 @@
+# BEGIN BOILERPLATE
+henchmen: &henchmen
+  card_type: "HENCHMEN"
+  type_background: "#dcbc48"
+  type_color: "White"
+villain: &villain
+  card_type: "VILLAIN"
+  type_background: "#623535"
+  type_color: "White"
+mastermind: &mastermind
+  card_type: "MASTERMIND"
+  type_background: "#766f92"
+  type_color: "White"
+player: &player
+  card_type: "PLAYER"
+  type_background: "#355e3b"
+  type_color: "White"
+  image: "player"
+  teams: ["shield"]
+hero: &hero
+  name_background: "#ED1D24"
+clear: &clear !!python/tuple [0, 0, 0, 0]
+font: &font "resources/KOMIKAX_.ttf"
+# END BOILERPLATE
+
+grid_lines: True
+grid_width: 1
+grid_spacing: 18
+double_sided: False
+separate_docs: True
+width_count: 2
+height_count: 3
+page_width: 1700
+page_height: 2200
+divider_width: &divider_width 715
+divider_height: &divider_height 592
+offset_height: 100
+offset_width: 90
+margin_width: 80
+margin_height: 100
+format:
+  width: *divider_width
+  height: *divider_height
+  icon_height: &icon_height 32
+  properties:
+    - position: [0, 0]
+      size: [*divider_width, &label_height 72]
+      type: "container"
+      spacing: 8
+      backwards: False
+      properties:
+        - property: "card_type"
+          required: False
+          position: [0, 0]
+          size: ["auto", *label_height]
+          type: "text"
+          background_property: "type_background"
+          background_default: "Black"
+          text_color_property: "type_color"
+          text_color_default: "White"
+          font: *font
+          font_size: 24
+          centered_width: True
+          centered_height: True
+        - property: "name"
+          required: True
+          position: ["auto", 0]
+          size: ["auto", *label_height]
+          type: "text"
+          background_property: "name_background"
+          background_default: "White"
+          text_color_property: "name_color"
+          text_color_default: "Black"
+          font: *font
+          font_size: 24
+          centered_width: False
+          centered_height: True
+        - type: "container"
+          position: ["auto", 0]
+          size: ["auto", *label_height]
+          spacing: 8
+          backwards: True
+          properties:
+          - property: "colors"
+            required: False
+            position: ["auto", 0]
+            size: [180, *label_height]
+            type: "colorbar"
+          - property: "teams"
+            required: False
+            position: ["auto", 0]
+            size: [*icon_height, *label_height]
+            type: "list[icons]"
+            centered_height: True
+            centered_width: True
+            rows: 2
+            columns: null
+            spacing: 8
+            orientation: "vertical"
+            bulleted: False
+            wrap: null
+          - property: "themes"
+            required: False
+            position: ["auto", 0]
+            size: ["auto", *label_height]
+            type: "list[iconsandtext]"
+            text_color_property: "themes_color"
+            text_color_default: "Black"
+            font: *font
+            font_size: 12
+            centered_width: False
+            centered_height: True
+            rows: 2
+            columns: null
+            spacing: 8
+            orientation: "horizontal"
+            bulleted: False
+            wrap: null
+    - property: "image"
+      position: [0, *label_height]
+      size: [*divider_width, &image_height 520]
+      type: "image"
+    - property: "notes"
+      required: False
+      position: [0, *label_height]
+      size: [*divider_width, *image_height]
+      type: "list[text]"
+      text_color_property: "notes_color"
+      text_color_default: "Black"
+      font: *font
+      font_size: 16
+      centered_width: False
+      centered_height: True
+      rows: null
+      columns: null
+      spacing: 8
+      orientation: "vertical"
+      bulleted: True
+      wrap: 70
+populate_from_rarities:
+  rarities:
+    <<: *hero
+    <<: *hero
+    common1: 5
+    common2: 5
+    uncommon: 3
+    rare: 1
+  properties:
+    color: "colors"
+    cost: "costs"
+    attack: "attacks"
+    recruit: "recruits"
+    piercing: "piercings"
+
+cards:
+  - <<: *mastermind
+    name: "Authoritarian Iron Man"
+    image: "authoritarianironman"
+    themes: ["Fortify", "City Space", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Baron Helmut Zemo"
+    image: "baronhelmutzemo"
+    themes: ["wound", "Shrinks", "Victory Pile", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Maria Hill, Director of S.H.I.E.L.D"
+    image: "mariahilldirector"
+    #themes: ["Shield Clearance", "Extra Villains", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Misty Knight"
+    image: "mistyknight"
+    themes: ["wound", "MarvelKnights", "Bribe", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Ragnarok"
+    image: "ragnarok"
+    themes: ["Grows", "Hero Classes in HQ", "Discard", "Mostly Positive Fight"]
+  - <<: *henchmen
+    name: "Mandroid"
+    image: "mandroid"
+    themes: ["+1 For each in VP", "Fight: KO Hero"]
+  - <<: *henchmen
+    name: "Cape-Killers"
+    image: "capekillers"
+    themes: ["Shield Clearance", "Fight: KO from Discard"]
+  - <<: *villain
+    name: "Great Lakes Avengers"
+    image: "greatlakesavengers"
+    themes: ["strength", "covert", "wound", "KO from Discard", "Top Villain", "Recur", "Fortify Sidekick"]
+  - <<: *villain
+    name: "Heroes for Hire"
+    image: "heroesforhire"
+    themes: ["discard", "wound", "Fortify Mastermind", "KO Hero", "Shuffle Discard", "Recur"]
+  - <<: *villain
+    name: "Registration Enforcers"
+    image: "registrationenforcers"
+    themes: ["recruit", "discard", "5cost", "City Space", "Phasing", "Size Changing", "KO Hero"]
+  - <<: *villain
+    name: "S.H.I.E.L.D Elite"
+    image: "shieldelite"
+    themes: ["wound", "Shield Clearance", "Extra Villain", "Fortify Shield Officers"]
+  - <<: *villain
+    name: "Superhuman Registration Act"
+    image: "superhumanregistrationact"
+    themes: ["strength", "tech", "wound", "Fortify Deck", "Decrease Hand Size"] #, "Fortify HQ", "Size Changing",
+             #"Fortify Villain", "Fortify HQ"]
+  - <<: *villain
+    name: "Thunderbolts"
+    image: "thunderbolts"
+    themes: ["tech", "wound", "KO one of top 3", "Fortify Wound"]
+  - name: "Captain America, Secret Avenger"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "B"
+    rare:
+      color: "U"
+    image: "captainamericasecretavenger"
+    teams: ["avengers"]
+    # themes: ["avengers", "Hero Class Count", "Sidekicks", "Sidekick Matters", "Split"]
+  - name: "Cloak & Dagger"
+    <<: *hero
+    common1:
+      color: "UR"
+    common2:
+      color: "UR"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "U"
+    image: "cloakdagger"
+    teams: ["avengers", "MarvelKnights"]
+    themes: ["covert", "ranged", "draw", "City Space", "Phasing", "Feast", "Split", "Split Matters"]
+  - name: "Daredevil/Iron Fist"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "GY"
+    rare:
+      color: "R"
+    image: "daredevilironfist"
+    teams: ["avengers", "MarvelKnights"]
+    themes: ["draw", "topcard", "avengers", "Guess Cost", "Wall Crawl", "Diverse Costs"] #, "Top Card Manip", "Split"]
+  - name: "Falcon/Red Wing"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "YU"
+    uncommon:
+      color: "U"
+    rare:
+      color: "Y"
+    image: "falconredwing"
+    teams: ["avengers"]
+    themes: ["draw", "HQ Manip", "recruit", "-Symbol HQ", "attack", "-Symbol HQ", "Top Card Manip", "Split"]
+  - name: "Goliath"
+    <<: *hero
+    common1:
+      color: "BG"
+    common2:
+      color: "B"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "goliath"
+    teams: ["avengers"]
+    themes: ["tech", "strength", "draw", "4cost", "Size Changing", "Split"]
+  - name: "Hercules/Amadeus Cho"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "BG"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "herculesamadeuscho"
+    teams: ["avengers"]
+    themes: ["instinct", "draw", "strength", "avengers", "Bystanders", "Discard", "Feast 0-Cost", "Split"]
+  - name: "Hulkling"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "RG"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "hulkling"
+    teams: ["avengers"]
+    themes: ["strength", "covert", "Size Changing", "KO Wound", "Gain Wound", "Clone"]
+  - name: "Luke Cage/Jessica Jones"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "G"
+    image: "lukecagejessicajones"
+    teams: ["avengers", "MarvelKnights"]
+    #themes: ["draw", "instinct", "avengers", "Wound Replace", "Gain Wound", "Top Card Manip", "Prevent Wounds", "Split"]
+  - name: "Patriot/Hawkeye"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "BR"
+    rare:
+      color: "B"
+    image: "patriothawkeye"
+    teams: ["avengers"]
+    themes: ["covert", "topcard", "draw", "Hero Names", "Split"]
+  - name: "Peter Parker/Aunt May"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "YB"
+    rare:
+      color: "Y"
+    image: "peterparkerauntmay"
+    teams: ["avengers", "spiderman"]
+    themes: ["tech", "instinct", "2cost", "draw", "Sidekicks", "Bystanders"] #, "KO Wound", "Draw Matters", "Split"]
+  - name: "Speedball/Namorita"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "U"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "U"
+    image: "speedballnamorita"
+    teams: ["NewWarriors"]
+    themes: ["covert", "ranged", "draw", "Split", "Bystanders", "Top Villain", "City Space", "Replace Master Strike"]
+  - name: "Stature/Iron Lad"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "BG"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "statureironlad"
+    teams: ["avengers"]
+    themes: ["tech", "draw", "strength", "Size Changing", "Small Villain", "Free Defeat", "Split"]
+  - name: "Storm & Black Panther"
+    <<: *hero
+    common1:
+      color: "YU"
+    common2:
+      color: "YU"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "B"
+    image: "stormblackpanther"
+    teams: ["xmen", "avengers"]
+    themes: ["ranged", "instinct", "covert", "draw", "City Space", "KO"] #, "Move Villain", "Split", "Sidekicks",
+             #"Multicolor Matters"]
+  - name: "Tigra"
+    <<: *hero
+    common1:
+      color: "RY"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "tigra"
+    teams: ["avengers"]
+    themes: ["covert", "instict", "draw", "topcard", "avengers", "Sidekicks", "Feast", "Replace Ambush", "Free Recruit",
+             "Split"]
+  - name: "Vision"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "B"
+    uncommon:
+      color: "UB"
+    rare:
+      color: "B"
+    image: "vision"
+    teams: ["avengers"]
+    themes: ["ranged", "draw", "topcard", "tech", "Phasing", "Guess Class", "Size Changing"]
+  - name: "Wiccan/Speed"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "R"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "U"
+    image: "wiccanspeed"
+    teams: ["avengers"]
+    themes: ["covert", "ranged", "topcard", "draw", "Phasing", "Guess Cost", ]
+  - name: "Shield Officers"
+    name_background: "#C4A8FF"
+    image: "shieldofficer"
+    colors: ["E"]
+  - name: "Sidekicks"
+    name_background: "#C4A8FF"
+    image: "sidekick"
+    colors: ['E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E',
+             'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'Y', 'Y', 'Y', 'Y', 'U', 'U', 'U', 'U', 'R', 'R', 'R', 'R',
+             'R', 'G', 'G']
+    themes: ["draw", "ranged", "6recruit", "Phasing", "Bystanders", "KO"]
+  - name: "Bystander"
+    name_background: "#dcbd48"
+    image: "bystander"
