@@ -41,3 +41,12 @@
           "falconredwing", "goliath", "herculesamadeuscho", "hulkling", "lukecagejessicajones",
           "patriothawkeye", "speedballnamorita", "peterparkerauntmay", "statureironlad",
           "tigra", "vision", "wiccanspeed", "sidekick", "wound"]
+- path: "image_sources/legendary_ant_man_card_dividers.pdf"
+  names: ["ultron", "morganlefay", "queensvengeance", "ultronslegacy", "antman", "blackknight",
+          "jocasta", "wasp", "wonderman"]
+- path: "image_sources/Legendary_Fantastic_Four_Dividers.pdf"
+  names: ["galactus", "moleman", "heraldsofgalactus", "subterranea", "humantorch", "invisiblewoman",
+          "mrfantastic", "silversurfer", "thing"]
+- path: "image_sources/Legendary_Deadpool_Card_Dividers.pdf"
+  names: ["evildeadpool", "machogomez", "deadpoolsfriends", "evildeadpoolcorpse", "deadpoolmercs",
+          "stingray", "solo", "slapstick", "bobhydra"]
