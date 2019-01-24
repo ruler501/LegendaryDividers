@@ -367,6 +367,35 @@ cards:
     name: "Morgan Le Fay"
     image: "morganlefay"
     themes: ["wound", "covert", "Chivalrous Duel", "Gain 0-Cost", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Carnage"
+    image: "carnage"
+    themes: ["wound", "Feast", "0-Cost", "Mostly Positive Fight"]
+  - <<: *mastermind
+    name: "Mysterio"
+    image: "mysterio"
+    themes: ["Extra Tactics", "Even Mix Fight"]
+  - <<: *mastermind
+    name: "Adrian Toomes"
+    image: "adriantoomes"
+    themes: ["Striker", "Triggers Escape", "Mostly Positive Fight", "Epic"]
+  - <<: *mastermind
+    name: "Vulture"
+    image: "vulture"
+    themes: ["wound", "KO From HQ", "Mostly Negative Fight", "Epic"]
+  - <<: *mastermind
+    name: "Fin Fang Foom"
+    image: "finfangfoom"
+    themes: ["instinct", "ranged", "tech", "covert", "strength", "Size-Changing", "Demolish", "Mostly Negative Fight",
+             "Epic"]
+  - <<: *mastermind
+    name: "Pagliacci"
+    image: "pagliacci"
+    themes: ["Extra Scheme Twists", "Demolish", "Mostly Negative Fight", "Epic"]
+  - <<: *mastermind
+    name: "Uru-Enchanted Iron Man"
+    image: "uruenchantedironman"
+    themes: ["Demolish", "Uru-Enchanted", "Mostly Negative Fight"]
   - <<: *player
     name: "Player One"
   - <<: *player
@@ -623,6 +652,36 @@ cards:
     themes: ["ranged",  "strength", "covert", "tech", "wound", "KO Hero",
              "Microscopic Size-Changing", "Chivalrous Duel"] #, "Reveal can Feast", "Color Count", "KO Discard",
              #"Extra Villain", "Pass Card"]
+  - <<: *villain
+    name: "Maximum Carnage"
+    image: "maximumcarnage"
+    themes: ["wound", "Feast", "Recur", "Bystanders", "Cost Matters", "0-Cost"]
+  - <<: *villain
+    name: "Sinister Six"
+    image: "sinistersix"
+    themes: ["instinct", "Clone Hero", "Bystanders", "Cost Matters", "Villain Count", "Discard", "City Space"]
+  - <<: *villain
+    name: "Salvagers"
+    image: "salvagers"
+    themes: ["ranged", "instinct", "tech", "wound", "Striker", "KO 0-Cost", "Discard", "Extra Recruit"]
+  - <<: *villain
+    name: "Vulture Tech"
+    image: "vulturetech"
+    themes: ["Striker", "KO/Discard-", "recruit", "Danger Sense", "Wall Crawl", "Bystanders", "Jump to Rooftops"]
+  - <<: *villain
+    name: "Monsters Unleashed"
+    image: "monstersunleashed"
+    themes: ["instinct", "ranged", "tech", "covert", "strength", "Bystanders", "Size-Changing", "KO Hero",
+             "Extra Villains"] #, "Increase Hand Size", "Restriction", "Cost Reduction", "Demolish"]
+  - <<: *villain
+    name: "Wrecking Crew"
+    image: "wreckingcrew"
+    themes: ["Charge", "Demolish", "KO Hero", "City Space"]
+  - <<: *villain
+    name: "The Mighty"
+    image: "themighty"
+    themes: ["ranged", "instinct", "wound", "draw", "Uru-Enchanted", "Bystanders", "Recur", "Extra Recruit", "Each Draw/Discard",
+             "KO Hero", "Extra Strike or Twist"] #, "Extra Villains"]
   - name: "Black Panther"
     <<: *hero
     common1:
@@ -1883,6 +1942,282 @@ cards:
     image: "blackknight"
     teams: ["avengers"]
     themes: ["strength", "Return 0-Cost from Discard", "Empowered", "Master Strike Trigger", "VP"]
+  - name: "Black Cat"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "R"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "R"
+    image: "blackcat"
+    teams: ["spiderman"]
+    themes: ["covert", "spiderman", "topcard", "Wall-Crawl", "HQ Space", "Top Card Manip", "Steal Bystanders",
+             "Rescue Matters"]
+  - name: "Moon Knight"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "B"
+    rare:
+      color: "Y"
+    image: "moonknight"
+    teams: ["MarvelKnights"]
+    themes: ["instinct", "tech", "topcard", "draw", "Wall-Crawl", "City Space", "KO", "Bystanders", "Move Villain"]
+  - name: "Scarlet Spider"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "scarletspider"
+    teams: ["spiderman"]
+    themes: ["spiderman", "draw", "instinct", "Wall-Crawl", "Wall-Crawl Matters"]
+  - name: "Spider-Woman"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "G"
+    uncommon:
+      color: "U"
+    rare:
+      color: "R"
+    image: "spiderwoman"
+    teams: ["spiderman"]
+    themes: ["topcard", "draw", "spiderman", "recruit", "-Icon", "Wall-Crawl", "attack", "-Icon", "From Hand to Top", "Free Recruit"]
+  - name: "Happy Hogan"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "B"
+    rare:
+      color: "Y"
+    image: "happyhogan"
+    themes: ["instinct", "Coordinate", "KO Wounds", "Danger Sense", "KO Master Strike", "Striker"]
+  - name: "High-Tech Spider Man"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "B"
+    rare:
+      color: "B"
+    image: "hightechspiderman"
+    teams: ["spiderman"]
+    themes: ["topcard", "draw", "covert", "tech", "Wall Crawl", "Danger Sense", "Coordinate", "City Space"]
+  - name: "Peter's Allies"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "R"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "R"
+    image: "petersallies"
+    teams: ["spiderman"]
+    themes: ["covert", "draw", "spiderman", "Bribe", "Coordinate", "Coordinate Matters"]
+  - name: "Peter Parker, Homecoming"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "B"
+    rare:
+      color: "G"
+    image: "peterparkerhomecoming"
+    teams: ["spiderman"]
+    themes: ["instinct", "tech", "topcard", "Danger Sense", "Coordinate", "Shuffle Twist"]
+  - name: "Tony Stark"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "B"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "tonystark"
+    teams: ["avengers"]
+    themes: ["tech", "avengers", "Danger Sense", "Coordinate", "Top Villain Deck"]
+  - name: "Gwenpool"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "gwenpool"
+    teams: ["champions"]
+    themes: ["covert", "instinct", "draw", "Versatile", "Bystanders", "Cheering Crowds", "Demolish"]
+  - name: "Ms. Marvel"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "G"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "msmarvel"
+    teams: ["champions"]
+    themes: ["covert", "strength", "draw", "champions", "Versatile", "Bystanders", "Cheering Crowds", "KO",
+             "Size-Changing"]
+  - name: "Nova"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "U"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "nova"
+    teams: ["champions"]
+    themes: ["champions", "ranged", "strength", "Bystanders", "Versatile", "Cheering Crowds", "recruit", "-Icon",
+             "attack", "-Icon"]
+  - name: "Totally Awesome Hulk"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "B"
+    uncommon:
+      color: "G"
+    rare:
+      color: "B"
+    image: "totallyawesomehulk"
+    teams: ["champions"]
+    themes: ["strength", "tech", "draw", "Bystanders", "Cheering Crowds", "Draw Matters", "KO Wound"] #, "Gain Wound"]
+  - name: "Viv Vision"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "B"
+    uncommon:
+      color: "U"
+    rare:
+      color: "B"
+    image: "vivvision"
+    teams: ["champions"]
+    themes: ["tech", "ranged", "Bystanders", "Increase Hand Size", "Versatile", "Cheering Crowds", "Recruiting Matters",
+             "Size-Changing"]
+  - name: "Greithoth, Breaker of Wills"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "G"
+    rare:
+      color: "R"
+    image: "greithoth"
+    teams: ["EnemiesOfAsgard"]
+    themes: ["covert", "Thrown Artifact", "Artifacts Matter", "Bottom Card"]
+  - name: "Kuurth, Breaker of Stone"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "G"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "kuurth"
+    teams: ["EnemiesOfAsgard"]
+    themes: ["4cost", "topcard", "FoesOfAsgard", "Bottom Card", "Thrown Artifact"] #, "Mill Others"]
+  - name: "Nerkkod, Breaker of Oceans"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "R"
+    uncommon:
+      color: "U"
+    rare:
+      color: "Y"
+    image: "nerkkod"
+    teams: ["EnemiesOfAsgard"]
+    themes: ["EnemiesOfAsgard", "Move Villain", "KO", "New Recruit", "Thrown Artifact"] #, "City Space", "Steal Recruits"]
+  - name: "Nul, Breaker of Worlds"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "nulbreakerofworlds"
+    teams: ["EnemiesOfAsgard"]
+    themes: ["strength", "draw", "Thrown Artifact", "Demolish", "Bindings", "KO"]
+  - name: "Skadi"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "B"
+    uncommon:
+      color: "G"
+    rare:
+      color: "R"
+    image: "skadi"
+    teams: ["Hydra"]
+    themes: ["tech", "Hydra", "draw", "Madame Hydra", "Discard", "Discard Matters", "Thrown Artifact"]
+  - name: "Skirn, Breaker of Men"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "U"
+    rare:
+      color: "G"
+    image: "skirn"
+    teams: ["EnemiesOfAsgard"]
+    themes: ["instinct", "covert", "draw", "New Recruits", "Bottom Card", "Bottom Manip"]
+  - name: "Symbiote Spider-Man"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "U"
+    image: "symbiotespiderman"
+    teams: ["spiderman"]
+    themes: ["2cost", "topcard", "draw", "Wall Crawl", "Hand to Top"]
   - name: "Master Strikes"
     card_type: "                "
     type_background: "#766f92"

@@ -50,3 +50,15 @@
 - path: "image_sources/Legendary_Deadpool_Card_Dividers.pdf"
   names: ["evildeadpool", "machogomez", "deadpoolsfriends", "evildeadpoolcorpse", "deadpoolmercs",
           "stingray", "solo", "slapstick", "bobhydra"]
+- path: "image_sources/Legendary_Champions_Card_Dividers.pdf"
+  names: ["finfangfoom", "pagliacci", "monstersunleashed", "wreckingcrew", "totallyawesomehulk",
+          "msmarvel", "nova", "gwenpool", "vivvision"]
+- path: "image_sources/Legendary_Paint_the_Town_Red_Dividers.pdf"
+  names: ["carnage", "mysterio", "maximumcarnage", "sinistersix", "blackcat", "moonknight",
+          "scarletspider", "spiderwoman", "symbiotespiderman"]
+- path: "image_sources/Legendary_Fear_Itself_Dividers.pdf"
+  names: ["uruenchantedironman", "themighty", "greithoth", "kuurth", "nerkkod", "nulbreakerofworlds",
+          "skadi", "skirn"]
+- path: "image_sources/Legendary_Spider_Man_Homecoming_Dividers.pdf"
+  names: ["adriantoomes", "vulture", "salvagers", "vulturetech", "happyhogan", "hightechspiderman",
+          "petersallies", "peterparkerhomecoming", "tonystark"]
