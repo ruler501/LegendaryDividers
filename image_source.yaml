@@ -60,5 +60,19 @@
   names: ["uruenchantedironman", "themighty", "greithoth", "kuurth", "nerkkod", "nulbreakerofworlds",
           "skadi", "skirn"]
 - path: "image_sources/Legendary_Spider_Man_Homecoming_Dividers.pdf"
-  names: ["adriantoomes", "vulture", "salvagers", "vulturetech", "happyhogan", "hightechspiderman",
-          "petersallies", "peterparkerhomecoming", "tonystark"]
+  names: ["adriantoomes", "vulture", "salvagers", "vulturetech", "homecomingschemes", "happyhogan",
+          "hightechspiderman", "petersallies", "peterparkerhomecoming", "tonystark"]
+- path: "image_sources/Legendary_Secret_Wars_Volume_2_Dividers.pdf"
+  names: ["kinghyperion", "spiderqueen", "shiklahthedemonbride", "immortalemperorzhengzhu", "utopolis",
+          "guardiansofknowhere", "deadpoolssecretwars", "xmen92", "kunlun", "monstermetropolis",
+          "magmamen", "spiderinfected", "khonshuguardians", "beastilluminati", "captainbritain",
+          "corvusglaive", "blackswan", "rubysummers", "timetravelingjeangrey", "phoenixforcecyclops",
+          "soulswordcolossus", "silk", "agentvenom", "spidergwen", "shangchi", "drpunishersoldiersupreme",
+          "elsabloodstone", "thecaptainandthedevil", "arkonthemagnificent", "bystander"]
+- path: "image_sources/Legendary_Marvel_XD_Dividers.pdf"
+  names: ["circusofcrime", "spiderslayer", "blackwidow3d", "deadpool3d", "hulk3d", "howardtheduck",
+          "manthing"]
+- path: "image_sources/Legendary_Guardians_of_the_Galaxy_Dividers.pdf"
+  names: ["thanosmastermind", "supremeintelligience", "kreestarforce", "infinitygems", "groot", "gamora",
+          "rocketraccoon", "starlord", "drax"]
+- path: "image_sources/Legendary

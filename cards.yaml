@@ -396,6 +396,30 @@ cards:
     name: "Uru-Enchanted Iron Man"
     image: "uruenchantedironman"
     themes: ["Demolish", "Uru-Enchanted", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Immortal Emperor Zheng-Zhu"
+    image: "immortalemperorzhengzhu"
+    themes: ["MarvelKnights", "7cost", "Discard", "7th Circle"] #, "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "King Hyperion"
+    image: "kinghyperion"
+    themes: ["wound", "Enters City", "Charge", "Can't Defeat in City", "Positive Fight"]
+  - <<: *mastermind
+    name: "Shiklah, the Demon Bride"
+    image: "shiklahthedemonbride"
+    themes: ["Dig for Twists", "Gain as Hero", "Fateful Resurrection", "Positive Fight"]
+  - <<: *mastermind
+    name: "Spider-Queen"
+    image: "spiderqueen"
+    themes: ["wound", "+ For Escaped Bystanders", "Recur Spider-Infected", "Mostly Negative Fight"]
+  - <<: *mastermind
+    name: "Supreme Intelligience of the Kree"
+    image: "supremeintelligience"
+    themes: ["Shards"] #, "Discard", "Negative Fight"]
+  - <<: *mastermind
+    name: "Thanos"
+    image: "thanosmastermind"
+    themes: ["Shrinks", "Steals Non-Grey", "Negative Fight"]
   - <<: *player
     name: "Player One"
   - <<: *player
@@ -471,6 +495,26 @@ cards:
     name: "Cape-Killers"
     image: "capekillers"
     themes: ["Shield Clearance", "Fight: KO from Discard"]
+  - <<: *henchmen
+    name: "Khonshu Guardians"
+    image: "khonshuguardians"
+    themes: ["+2 in Sewers, Rooftops, Bridge", "Fight: KO Hero"]
+  - <<: *henchmen
+    name: "Magma Men"
+    image: "magmamen"
+    themes: ["Fateful Ressurection", "Fight: KO Hero"]
+  - <<: *henchmen
+    name: "Spider-Infected"
+    image: "spiderinfected"
+    themes: ["Captures Bystander", "Fight: Next Hero has Wall-Crawl"]
+  - <<: *henchmen
+    name: "Circus of Crime"
+    image: "circusofcrime"
+    themes: ["Fight: Reveal Top, if 0 cost KO, else draw"]
+  - <<: *henchmen
+    name: "Spider-Slayers"
+    image: "spiderslayer"
+    themes: ["Fight: Reveal top 2. Put all 2 or less cost in hand"]
   - <<: *villain
     name: "Shadow-X"
     image: "shadowx"
@@ -682,6 +726,39 @@ cards:
     image: "themighty"
     themes: ["ranged", "instinct", "wound", "draw", "Uru-Enchanted", "Bystanders", "Recur", "Extra Recruit", "Each Draw/Discard",
              "KO Hero", "Extra Strike or Twist"] #, "Extra Villains"]
+  - <<: *villain
+    name: "Deadpool's Secret Wars"
+    image: "deadpoolssecretwars"
+    themes: ["Circle of Kung-Fu", "Bystanders", "Ascend", "Spectrum", "Fateful Resurrection"] #, "KO Hero"]
+  - <<: *villain
+    name: "Guardians of Knowhere"
+    image: "guardiansofknowhere"
+    themes: ["wound", "draw", "Fateful Resurrection", "Ascend", "Charge", "Patrol", "KO Hero"] #, "Reveal Can Feast"]
+  - <<: *villain
+    name: "K'un-Lun"
+    image: "kunlun"
+    themes: ["wound", "draw", "Circle of Kung-Fu", "Discard", "KO Heroes"]
+  - <<: *villain
+    name: "Monster Metropolis"
+    image: "monstermetropolis"
+    themes: ["wound", "Fateful Resurrection", "CDR", "KO-Discard", "Bystanders", "Charge", "City Space"]
+  - <<: *villain
+    name: "Utopolis"
+    image: "utopolis"
+    themes: ["wound", "Charge", "Spectrum", "KO-Discard", "City Space", "Extra Scheme Twist", "Ascend", "Patrol"]
+  - <<: *villain
+    name: "X-Men '92"
+    image: "xmen92"
+    themes: ["Charge", "Ascend", "CDR", "Gain as Hero", "tech", "instinct", "draw", "Spectrum"]
+    colors: ["G", "G", "U", "U", "U", "Y", "Y"]
+  - <<: *villain
+    name: "Kree Starforce"
+    image: "kreestarforce"
+    themes: ["wound", "draw", "Shards", "Pointing"]
+  - <<: *villain
+    name: "Infinity Gems"
+    image: "infinitygems"
+    themes: ["Gain as Artifact", "Shards", "Extra Villain"]
   - name: "Black Panther"
     <<: *hero
     common1:
@@ -1876,7 +1953,7 @@ cards:
       color: "B"
     image: "stingray"
     teams: ["mercsformoney"]
-    themes: ["tech", "MercsForMoney", "City Space", "Move Villain", "KO", "KO'd Heroes"]
+    themes: ["tech", "draw", "MercsForMoney", "City Space", "Move Villain", "KO", "KO'd Heroes"]
   - name: "Ant-Man"
     <<: *hero
     common1:
@@ -2218,6 +2295,339 @@ cards:
     image: "symbiotespiderman"
     teams: ["spiderman"]
     themes: ["2cost", "topcard", "draw", "Wall Crawl", "Hand to Top"]
+  - name: "Agent Venom"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "G"
+    image: "agentvenom"
+    teams: ["spiderman"]
+    themes: ["Spectrum", "Wall-Crawl", "Patrol", "recruit", "-Icon", "attack", "-Icon"]
+  - name: "Arkon the Magnificent"
+    <<: *hero
+    common1:
+      color: "RG"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "arkonthemagnificent"
+    themes: ["Wall-Crawl", "draw", "Patrol", "Spectrum", "Free Defeat"]
+  - name: "Beast"
+    <<: *hero
+    common1:
+      color: "BG"
+    common2:
+      color: "BG"
+    uncommon:
+      color: "BG"
+    rare:
+      color: "BG"
+    image: "beastilluminati"
+    teams: ["Illuminati"]
+    themes: ["topcard", "draw", "tech", "strength", "Patrol", "Cost Reduction"]
+  - name: "Black Swan"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "YU"
+    rare:
+      color: "R"
+    image: "blackswan"
+    teams: ["cabal"]
+    themes: ["ranged", "instinct", "draw", "Top Villain", "KO", "Bystanders", "Anti-", "cabal"]
+  - name: "The Captain and the Devil"
+    <<: *hero
+    common1:
+      color: "BG"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "U"
+    image: "thecaptainandthedevil"
+    teams: ["avengers"]
+    themes: ["Spectrum", "Patrol", "KO", "City Space"]
+  - name: "Captain Britain"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "R"
+    uncommon:
+      color: "RG"
+    rare:
+      color: "G"
+    image: "captainbritain"
+    teams: ["illuminati"]
+    themes: ["topcard", "draw", "Team Icon Count", "Patrol", "Increase Hand Size"]
+  - name: "Corvus Glaive"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "G"
+    rare:
+      color: "B"
+    image: "corvusglaive"
+    teams: ["cabal"]
+    themes: ["cabal", "KO Bystanders", "Escaped Bystanders", "KO from VPs and Escape"]
+  - name: "Dr. Punisher, Soldier Supreme"
+    <<: *hero
+    common1:
+      color: "UB"
+    common2:
+      color: "B"
+    uncommon:
+      color: "U"
+    rare:
+      color: "U"
+    image: "drpunishersoldiersupreme"
+    teams: ["MarvelKnights"]
+    themes: ["tech", "ranged", "draw", "Patrol", "Feast 0-Cost"] #, "Top Villain Deck", "City Space"]
+  - name: "Elsa Bloodstone"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "BR"
+    uncommon:
+      color: "U"
+    rare:
+      color: "G"
+    image: "elsabloodstone"
+    teams: ["shield"]
+    themes: ["shield", "Spectrum", "KO", "Patrol", "Bystanders"]
+  - name: "Phoenix Force Cyclops"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "R"
+    uncommon:
+      color: "YU"
+    rare:
+      color: "U"
+    image: "phoenixforcecyclops"
+    teams: ["xmen"]
+    themes: ["Self-KO", "Free Acquire", "Recur KO'd Hero", "KO Hand"]
+  - name: "Ruby Summers"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "GU"
+    uncommon:
+      color: "G"
+    rare:
+      color: "U"
+    image: "rubysummers"
+    teams: ["xmen"]
+    themes: ["xmen", "Teleport", "Discard Replace", "Discard"]
+  - name: "Shang-Chi"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "RY"
+    uncommon:
+      color: "R"
+    rare:
+      color: "Y"
+    image: "shangchi"
+    teams: ["MarvelKnights"]
+    themes: ["instinct", "Shuffle", "Patrol", "Wall-Crawl", "Rig Shuffle"]
+  - name: "Silk"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "GY"
+    uncommon:
+      color: "R"
+    rare:
+      color: "B"
+    image: "silk"
+    teams: ["spiderman"]
+    themes: ["2cost", "topcard", "draw", "spiderman", "Spectrum", "Feast 0-Cost"]
+  - name: "Soulsword Colossus"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "RG"
+    uncommon:
+      color: "G"
+    rare:
+      color: "Y"
+    image: "soulswordcolossus"
+    teams: ["xmen"]
+    themes: ["covert", "strength", "draw", "xmen", "Bystanders", "KO Hero", "Wound Replace", "CDR", "Free Acquire HQ or KO"]
+  - name: "Spider-Gwen"
+    <<: *hero
+    common1:
+      color: "YB"
+    common2:
+      color: "B"
+    uncommon:
+      color: "G"
+    rare:
+      color: "R"
+    image: "spidergwen"
+    teams: ["spiderman"]
+    themes: ["2cost", "topcard", "draw", "Patrol", "Bystanders", "Bystanders Matter", "Wall-Crawl", "Top Card Manip"]
+  - name: "Time-Traveling Jean Grey"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "UR"
+    rare:
+      color: "R"
+    image: "timetravelingjeangrey"
+    teams: ["xmen"]
+    themes: ["covert", "xmen", "City Space", "Patrol", "Increase Hand Size", "Move Villain"] #, "Free Acquire"]
+  - name: "Hulk"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "G"
+    uncommon:
+      color: "G"
+    rare:
+      color: "G"
+    image: "hulk3d"
+    teams: ["avengers"]
+    themes: ["strength", "Give Wounds", "KO Wounds"]
+  - name: "Deadpool"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "deadpool3d"
+    themes: ["Odd cost", "Bystanders", "Mulligan", "Pass Cards"]
+  - name: "Black Widow"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "B"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "blackwidow3d"
+    teams: ["avengers"]
+    themes: ["covert", "text", "draw", "KO", "Bystander", "Free Defeat"]
+  - name: "Howard the Duck"
+    <<: *hero
+    common1:
+      color: "Y"
+    common2:
+      color: "R"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "B"
+    image: "howardtheduck"
+    themes: ["topcard", "draw", "Special Bystanders", "0cost", "Teamless", "KO"]
+  - name: "Man-Thing"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "manthing"
+    themes: ["Teleport", "City Space", "Move Villain"]
+  - name: "Drax the Destroyer"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "Y"
+    image: "drax"
+    teams: ["GuardiansOfTheGalaxy"]
+    themes: ["GuardiansOfTheGalaxy", "instinct", "Artifact", "Surveil", "Feast", "Anti-Coop"]
+  - name: "Gamora"
+    <<: *hero
+    common1:
+      color: "R"
+    common2:
+      color: "Y"
+    uncommon:
+      color: "R"
+    rare:
+      color: "R"
+    image: "gamora"
+    teams: ["GuardiansOfTheGalaxy"]
+    themes: ["covert", "Shard", "Artifact"]
+  - name: "Groot"
+    <<: *hero
+    common1:
+      color: "G"
+    common2:
+      color: "G"
+    uncommon:
+      color: "R"
+    rare:
+      color: "G"
+    image: "groot"
+    teams: ["GuardiansOfTheGalaxy"]
+    themes: ["strength", "covert", "KO", "Shards", "Recruitment Matters"]
+  - name: "Rocket Raccoon"
+    <<: *hero
+    common1:
+      color: "B"
+    common2:
+      color: "U"
+    uncommon:
+      color: "Y"
+    rare:
+      color: "B"
+    image: "rocketraccoon"
+    teams: ["GuardiansOfTheGalaxy"]
+    themes: ["tech", "Rummaging", "Artifact", "Ambush/Master Strike Matters", "Striker"]
+  - name: "Star-Lord"
+    <<: *hero
+    common1:
+      color: "U"
+    common2:
+      color: "R"
+    uncommon:
+      color: "B"
+    rare:
+      color: "U"
+    image: "starlord"
+    themes: ["draw", "Artifact", "Shards", "Clone Artifact"]
   - name: "Master Strikes"
     card_type: "                "
     type_background: "#766f92"
